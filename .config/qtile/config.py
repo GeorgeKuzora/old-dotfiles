@@ -106,7 +106,7 @@ keys = [
     
     # Power managment commands
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
-    Key([mod, "control"], "q", lazy.spawn(), desc="Shutdown Qtile"),
+    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "q", lazy.spawn(os.path.expanduser('~/.config/rofi/powermenu.sh')), desc="Shutdown Qtile"),
     
     
@@ -187,29 +187,46 @@ for i in groups:
     ])
 
 # COLOUR SCHEME
-
-colors = [["#282828", "#282828"],#0 Very Dark
-          ["#32302f", "#32302f"],#1 Dark
-          ["#ebdbb2", "#ebdbb2"],#2 Pale yellow
-          ["#ff6c6b", "#ff6c6b"],#3 Rose
-          ["#b8bb26", "#b8bb26"],#4 green-yellow
-          ["#fabd2f", "#fabd2f"],#5 oranje
-          ["#b16286", "#b16286"],#6 magnete
-          ["#458588", "#458588"],#7 blue-green
-          ["#3c3836", "#3c3836"],#8 dark brown
-          ["#00000000", "#00000000"]]#9
-
+# Gruvbox like scheme
+# colors = [["#282828", "#282828"],#0 Very Dark
+#           ["#32302f", "#32302f"],#1 Dark
+#           ["#ebdbb2", "#ebdbb2"],#2 Pale yellow
+#           ["#ff6c6b", "#ff6c6b"],#3 Rose
+#           ["#b8bb26", "#b8bb26"],#4 green-yellow
+#           ["#fabd2f", "#fabd2f"],#5 oranje
+#           ["#b16286", "#b16286"],#6 magnete
+#           ["#458588", "#458588"],#7 blue-green
+#           ["#3c3836", "#3c3836"],#8 dark brown
+#           ["#00000000", "#00000000"]]#9
+# Nord scheme
+colors = [["#2E3440", "#2E3440"],#0 Polar Night 1
+          ["#3B4252", "#3B4252"],#1 Polar Night 2
+          ["#434C5E", "#434C5E"],#2 Polar Night 3
+          ["#4C566A", "#4C566A"],#3 Polar Night 4
+          ["#D8DEE9", "#D8DEE9"],#4 Snow Storm 1
+          ["#E5E9F0", "#E5E9F0"],#5 Snow Storm 2
+          ["#ECEFF4", "#ECEFF4"],#6 Snow Storm 3
+          ["#8FBCBB", "#8FBCBB"],#7 Frost 1 greenish
+          ["#88C0D0", "#88C0D0"],#8 Frost 2 light blue
+          ["#81A1C1", "#81A1C1"],#9 Frost 3 blue
+          ["#5E81AC", "#5E81AC"],#10 Frost 4 dark blue
+          ["#BF616A", "#BF616A"],#11 Aurora 1 red
+          ["#D08770", "#D08770"],#12 Aurora 2 orange
+          ["#EBCB8B", "#EBCB8B"],#13 Aurora 3 yellow
+          ["#A3BE8C", "#A3BE8C"],#14 Aurora 4 green
+          ["#B48EAD", "#B48EAD"],#15 Aurora 5 purpur
+          ["#00000000", "#00000000"]]#16 Transparent
 # LAYOUTS
 
 layout_theme = {"border_width": 2,
                 "margin": [4, 2, 0, 4],
-                "border_focus": colors[2][0], #2 Pale yellow
-                "border_normal": colors[7][0] #7 blue-green
+                "border_focus": colors[7][0], #2 Pale yellow
+                "border_normal": colors[2][0] #7 blue-green
                 }
 MonadTall_theme = {"border_width": 2,
                    "margin": 4,
-                   "border_focus": colors[2][0], #2 Pale yellow
-                   "border_normal": colors[7][0] #7 blue-green
+                   "border_focus": colors[7][0], #2 Pale yellow
+                   "border_normal": colors[2][0] #7 blue-green
                    }
 
 layouts = [
@@ -293,16 +310,16 @@ screens = [
             [   
                 widget.Sep(padding=10,
                            linewidth=0,
-                           foreground=colors[2],
-                           background=colors[5]),
+                           foreground=colors[1],
+                           background=colors[1]),
                 widget.TextBox(
-                    text='',
+                    text='❆',
                     font="Font Awesome 6 Free",
                     mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(os.path.expanduser('~/.config/rofi/powermenu.sh'))},
-                    background=colors[5],
-                    foreground=colors[0],
+                    background=colors[1],
+                    foreground=colors[6],
                     padding=4,
-                    fontsize=20,
+                    fontsize=28,
                 ),
                 # widget.Image(filename='~/.config/qtile/icons/python-white.png',
                 #             margin=0,
@@ -313,14 +330,14 @@ screens = [
                 widget.TextBox(
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[0],
-                    foreground=colors[5],
+                    background=colors[2],
+                    foreground=colors[1],
                     padding=0,
                     fontsize=30,
                 ),
                 widget.Sep(padding=8,
                            linewidth=0,
-                           background=colors[0],
+                           background=colors[2],
                            foreground=colors[2],), 
                 widget.GroupBox(
                                 font="JetBrainsMonoMedium Nerd Font Mono", # "Font Awesome 6 Free",
@@ -331,38 +348,38 @@ screens = [
                                 padding_y=5,
                                 padding_x=1,
                                 borderwidth=1,
-                                active=colors[2],
-                                inactive=colors[7],
+                                active=colors[6],
+                                inactive=colors[9],
                                 rounded=False,
-                                highlight_color=colors[1],
+                                highlight_color=colors[3],
                                 highlight_method="line",
-                                this_current_screen_border=colors[5],
-                                this_screen_border=colors[7],
-                                other_current_screen_border=colors[5],
-                                other_screen_border=colors[7],
+                                this_current_screen_border=colors[9],
+                                this_screen_border=colors[13],
+                                other_current_screen_border=colors[9],
+                                other_screen_border=colors[13],
                                 foreground=colors[2],
-                                background=colors[0],
+                                background=colors[2],
                 ),
                 widget.TextBox(
                         text = '',
                         font="JetBrainsMonoMedium Nerd Font Mono",
-                        background=colors[7],
-                        foreground=colors[0],
+                        background=colors[3],
+                        foreground=colors[2],
                         padding=0,
                         fontsize=30,
                         ),
                 widget.CurrentLayout(
                     fmt=' {}',
-                    foreground=colors[2],
-                    background=colors[7],
+                    foreground=colors[6],
+                    background=colors[3],
                     padding=5,
                     fontsize=wid_font,
                 ),
                 widget.TextBox(
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[2],
-                    foreground=colors[7],
+                    background=colors[10],
+                    foreground=colors[3],
                     padding=0,
                     fontsize=30,
                 ),    
@@ -370,14 +387,14 @@ screens = [
                 widget.Chord(
                     fontsize=wid_font,
                     chords_colors={
-                        'launch': (colors[0]),
+                        'launch': (colors[6]),
                     },
                     name_transform=lambda name: name.upper(),
                  ),
                 widget.WindowName(
-                    foreground=colors[0],
+                    foreground=colors[6],
                     fmt='{}',
-                    background=colors[2],
+                    background=colors[10],
                     padding=8,
                     max_chars=100,
                     width=665,
@@ -386,25 +403,25 @@ screens = [
                 widget.Sep(
                     linewidth=0,
                     padding=0,
-                    foreground=colors[0],
-                    background=colors[0]
+                    foreground=colors[10],
+                    background=colors[10]
                 ),
                 widget.TextBox(
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[0],
-                    foreground=colors[2],
+                    background=colors[9],
+                    foreground=colors[10],
                     padding=0,
                     fontsize=37
                 ),
                 widget.Spacer(
-                    background=colors[0]
+                    background=colors[9]
                 ),
                 widget.Sep(
                     linewidth=0,
                     padding=6,
-                    foreground=colors[0],
-                    background=colors[0]
+                    foreground=colors[9],
+                    background=colors[9]
                 ),
                 # widget.Net(
                 #          interface = "wlan0",
@@ -412,9 +429,16 @@ screens = [
                 #          foreground = colors[2],
                 #          background = colors[0],
                 #         ),
+                widget.Systray(
+                    # icon_size = 20,
+                    foreground=colors[0],
+                    background=colors[9],
+                    fontsize=wid_font,
+                    padding=8
+                    ),
                 widget.CPU(
-                        foreground = colors[2],
-                        background=colors[0],
+                        foreground = colors[0],
+                        background=colors[9],
                         fontsize=wid_font,
                         threshold = 90,
                         fmt = '{}',
@@ -424,14 +448,14 @@ screens = [
                 widget.TextBox(
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[0],
-                    foreground=colors[2],
+                    background=colors[9],
+                    foreground=colors[8],
                     padding=0,
                     fontsize=37
                     ),
                 widget.Memory(
                         foreground = colors[0],
-                        background = colors[2],
+                        background = colors[8],
                         fontsize=wid_font,
                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
                         fmt = 'Mem:{}',
@@ -441,13 +465,13 @@ screens = [
                 widget.TextBox(
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[2],
+                    background=colors[8],
                     foreground=colors[7],
                     padding=0,
                     fontsize=30
                 ),
                 widget.Volume(
-                    foreground=colors[2],
+                    foreground=colors[0],
                     background=colors[7],
                     fontsize=wid_font,
                     fmt='Vol:{} ',
@@ -458,45 +482,38 @@ screens = [
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
                     background=colors[7],
-                    foreground=colors[0],
+                    foreground=colors[4],
                     padding=0,
                     fontsize=30
                     ),
                 widget.Battery(
-                     foreground=colors[2],
-                     background=colors[0],
+                     foreground=colors[0],
+                     background=colors[4],
                      fontsize=wid_font,
                      format='{percent:2.0%}',
                      padding=2
                         ),
-                widget.Systray(
-                    # icon_size = 20,
-                    foreground=colors[2],
-                    background=colors[0],
-                    fontsize=wid_font,
-                    padding=8
-                    ),
                 widget.TextBox(
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[0],
-                    foreground=colors[5],
+                    background=colors[4],
+                    foreground=colors[6],
                     padding=0,
                     fontsize=30
                 ),
                 widget.Clock(format='%d-%m %a %H:%M',
                              foreground=colors[0],
-                             background=colors[5],
+                             background=colors[6],
                              fontsize=wid_font,
                              padding=2,
                              ),
                 widget.Sep(padding=10,
                            linewidth=0,
-                           foreground=colors[2],
-                           background=colors[5]),
+                           foreground=colors[6],
+                           background=colors[6]),
             ],
             28,  # height in px
-            background=colors[9],  # background color
+            background=colors[0],  # background color
             margin=[4, 4, 0, 4],
          ), ),
  ]

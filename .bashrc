@@ -86,6 +86,7 @@ alias ls='ls --color=auto'
 alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
 alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
 alias vi='nvim'
+alias peerflix='peerflix -l -k'
 
 #### History settings ####
 # don't put duplicate lines or lines starting with space in the history.

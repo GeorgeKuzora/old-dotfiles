@@ -131,6 +131,10 @@ keys = [
         lazy.spawn(myCode),
         desc='My code editor'
         ),
+    Key([mod], "o",
+        lazy.spawn("obsidian"),
+        desc='My Obsidian'
+        ),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([], "Print",
         lazy.spawn("flameshot gui"),

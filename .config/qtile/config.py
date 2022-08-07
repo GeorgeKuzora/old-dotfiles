@@ -11,7 +11,7 @@ mod = "mod4" # My mod key of choice - windows key
 terminal = "alacritty" # My browser of choice
 myBrowser = "brave" # My browser of choice
 myFilebrowser = "pcmanfm" # My filemanager of choice
-myCode = 'code' # My text editor of choice
+myCode = 'alacritty -e "nvim"' # My text editor of choice
 
 keys = [
     # Switch between windows
@@ -125,6 +125,10 @@ keys = [
         ),
     Key([mod], "v",
         lazy.spawn(myFilebrowser),
+        desc='My GUI file browser'
+        ),
+    Key([mod, "shift"], "v",
+        lazy.spawn('alacritty -e "ranger"'),
         desc='My GUI file browser'
         ),
     Key([mod], "c",

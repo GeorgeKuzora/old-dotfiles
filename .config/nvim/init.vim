@@ -1,38 +1,39 @@
 "GENERAL SETTINGS FOR NEOVIM
 
-set nohlsearch                  "Wthout highlight search
-set ignorecase                  "Search ignoring case of letters
-set incsearch                   "Search incrementaly when you input request
-set smartcase                   "Search with ignor case if all small and with case if even one is big
+" set nohlsearch                  "Wthout highlight search
+set hlsearch                  " With highlight search
+set ignorecase                  " Search ignoring case of letters
+set incsearch                   " Search incrementaly when you input request
+set smartcase                   " Search with ignor case if all small and with case if even one is big
 
-set autoindent                  "auto indention
-set smartindent                 "smart indention
-set expandtab                   "create spaces from tab
-set shiftround                  "When shifting lines, round the indentation to the nearest multiple of shiftwidth.
-set shiftwidth=4                "When shifting, indent using four spaces.
-set smarttab                    "Insert “tabstop” number of spaces when the “tab” key is pressed.
-set tabstop=4                   "Indent using four characters.
-set softtabstop=4               "Indent using four spaces.
+set autoindent                  " auto indention
+set smartindent                 " smart indention
+set expandtab                   " create spaces from tab
+set shiftround                  " When shifting lines, round the indentation to the nearest multiple of shiftwidth.
+set shiftwidth=4                " When shifting, indent using four spaces.
+set smarttab                    " Insert “tabstop” number of spaces when the “tab” key is pressed.
+set tabstop=4                   " Indent using four characters.
+set softtabstop=4               " Indent using four spaces.
 
-set display+=lastline           "Always try to show a paragraph’s last line.
-set encoding=utf-8              "Use an encoding that supports unicode.
+set display+=lastline           " Always try to show a paragraph’s last line.
+set encoding=utf-8              " Use an encoding that supports unicode.
 set fileencoding=utf-8                  " The encoding written to file
-set nowrap                      "Disable line wrapping
+set nowrap                      " Disable line wrapping
 " set wrap                      -Enable line wrapping.
 " set linebreak                 -Avoid wrapping a line in the middle of a word.
-set scrolloff=8                 "The number of screen lines to keep above and below the cursor.
-set sidescrolloff=5             "The number of screen columns to keep to the left and right of the cursor.
-syntax enable                   "Enable syntax highlighting.
+set scrolloff=8                 " The number of screen lines to keep above and below the cursor.
+set sidescrolloff=5             " The number of screen columns to keep to the left and right of the cursor.
+syntax enable                   " Enable syntax highlighting.
 
-set number                      "Show line numbers on the sidebar.
-set relativenumber              "Show line number on the current line and relative numbers on all other lines.
-set laststatus=2                "Always display the status bar.
-set ruler                       "Always show cursor position.
-set wildmenu                    "Display command line’s tab complete options as a menu.
-set tabpagemax=50               "Maximum number of tab pages that can be opened from the command line.
-set noerrorbells                "Disable beep on errors.
-set visualbell                  "Flash the screen instead of beeping on errors.
-set title                       "Set the window’s title, reflecting the file currently being edited.
+set number                      " Show line numbers on the sidebar.
+set relativenumber              " Show line number on the current line and relative numbers on all other lines.
+set laststatus=2                " Always display the status bar.
+set ruler                       " Always show cursor position.
+set wildmenu                    " Display command line’s tab complete options as a menu.
+set tabpagemax=50               " Maximum number of tab pages that can be opened from the command line.
+set noerrorbells                " Disable beep on errors.
+set visualbell                  " Flash the screen instead of beeping on errors.
+set title                       " Set the window’s title, reflecting the file currently being edited.
 " set background=dark             "Use colors that suit a dark background. Do we need it?
 
 
@@ -57,8 +58,8 @@ set shell                                           " The shell used to execute 
 " set spell                                         -Enable spellchecking.
 set wildignore+=.pyc,.swp                           " Ignore files matching these patterns when opening files based on a glob pattern.
 
-set colorcolumn=80                                  "colored line on 80 charachters
-highlight ColorColumn ctermbg=0 guibg=lightgrey     "set colors of colored line
+set colorcolumn=80                                  " colored line on 80 charachters
+highlight ColorColumn ctermbg=0 guibg=lightgrey     " set colors of colored line
 
 set pumheight=10                        " Makes popup menu smaller
 set cmdheight=2                         " More space for displaying messages
@@ -133,3 +134,5 @@ nnoremap <C-l> <C-w>l
 
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
+
+nnoremap <esc><esc> :noh<return><esc> " escape highlight search

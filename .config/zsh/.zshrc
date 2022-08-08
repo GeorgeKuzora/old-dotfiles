@@ -12,13 +12,9 @@ export KEYTIMEOUT=1
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/georgiy/.config/zsh/.zshrc'
-
-autoload -Uz compinit
-compinit
 # End of lines added by compinstall
 
-
-
+# pfetch at the start
 pfetch
 
 # From https://github.com/Mach-OS/Machfiles https://www.youtube.com/watch?v=bTLYiNvRIVI
@@ -29,11 +25,13 @@ stty stop undef		# Disable ctrl-s to freeze terminal.
 zle_highlight=('paste:none')
 
 # completions
-autoload -Uz compinit
+autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
 # zstyle ':completion::complete:lsof:*' menu yes select
 zmodload zsh/complist
-# compinit
+
 _comp_options+=(globdots)		# Include hidden files.
 
 autoload -U up-line-or-beginning-search

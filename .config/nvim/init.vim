@@ -19,8 +19,8 @@ set display+=lastline           " Always try to show a paragraph’s last line.
 set encoding=utf-8              " Use an encoding that supports unicode.
 set fileencoding=utf-8                  " The encoding written to file
 set nowrap                      " Disable line wrapping
-" set wrap                      -Enable line wrapping.
-" set linebreak                 -Avoid wrapping a line in the middle of a word.
+set wrap                      " Enable line wrapping.
+set linebreak                 " Avoid wrapping a line in the middle of a word.
 set scrolloff=8                 " The number of screen lines to keep above and below the cursor.
 set sidescrolloff=5             " The number of screen columns to keep to the left and right of the cursor.
 syntax enable                   " Enable syntax highlighting.
@@ -79,6 +79,11 @@ set clipboard=unnamedplus               " Copy paste between vim and everything 
 "set autochdir                           - Your working directory will always be the same as your working directory
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 
+set nocp                    " 'compatible' is not set
+filetype plugin on          " plugins are enabled
+
+set grepprg=rg\ --vimgrep\ --smart-case\ --follow
+
 "KEYBINDINGS
 
 inoremap ii <ESC>
@@ -135,4 +140,5 @@ nnoremap <C-l> <C-w>l
 nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
 
-nnoremap <esc><esc> :noh<return><esc> " escape highlight search
+" escape highlight search
+nnoremap <esc><esc> :noh<return><esc> 

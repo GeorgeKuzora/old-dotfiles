@@ -1,11 +1,11 @@
-# Language managment variables
+# Language managment variables /etc/enviroments
 typeset -U PATH path
 export GTK_IM_MODULE='fcitx'
 export QT_IM_MODULE='fcitx'
 export SDL_IM_MODULE='fcitx'
 export XMODIFIERS='@im=fcitx'
 
-# Clipmenu variables
+# Clipmenu variables /etc/enviroments
 export CM_SELECTIONS='clipboard'
 export CM_DEBUG=0
 export CM_OUTPUT_CLIP=0
@@ -28,7 +28,7 @@ export TERMINAL="alacritty"
 export BROWSER="brave"
 export VIDEO="mpv"
 export IMAGE="nsxiv"
-# export COLORTERM="truecolor"
-# export OPENER="xdg-open"
+export COLORTERM="truecolor"
+export OPENER="xdg-open"
 export PAGER="less"
 export WM="qtile"

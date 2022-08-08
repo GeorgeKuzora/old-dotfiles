@@ -123,11 +123,11 @@ keys = [
         lazy.spawn(myBrowser),
         desc='My browser'
         ),
-    Key([mod], "v",
+    Key([mod, "shift"], "v",
         lazy.spawn(myFilebrowser),
         desc='My GUI file browser'
         ),
-    Key([mod, "shift"], "v",
+    Key([mod], "v",
         lazy.spawn('alacritty -e "ranger"'),
         desc='My GUI file browser'
         ),

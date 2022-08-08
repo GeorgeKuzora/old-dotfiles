@@ -8,6 +8,7 @@ SAVEHIST=1000000
 setopt autocd
 unsetopt beep
 bindkey -v
+export KEYTIMEOUT=1
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/georgiy/.config/zsh/.zshrc'
@@ -16,12 +17,9 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-pfetch
 
-# Environment variables set everywhere
-export EDITOR="nvim"
-export TERMINAL="alacritty"
-export BROWSER="brave"
+
+pfetch
 
 # From https://github.com/Mach-OS/Machfiles https://www.youtube.com/watch?v=bTLYiNvRIVI
 
@@ -58,3 +56,6 @@ zsh_add_file "zsh-prompt"
 # Plugins
 zsh_add_plugin "zsh-autosuggestions"
 zsh_add_plugin "zsh-syntax-highlighting"
+
+
+

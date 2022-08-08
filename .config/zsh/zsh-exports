@@ -1,10 +1,8 @@
-#
-# ~/.bash_profile
-#
+#!/bin/sh
+# EXPORTS
 
-[[ -f ~/.bashrc ]] && . ~/.bashrc
 # Language managment variables
-typeset PATH path
+typeset -U PATH path
 export GTK_IM_MODULE='fcitx'
 export QT_IM_MODULE='fcitx'
 export SDL_IM_MODULE='fcitx'
@@ -20,3 +18,7 @@ export CM_LAUNCHER='rofi'
 # Добавление директорий в PATH
 PATH="$PATH:$HOME/.local/bin"
 export PATH
+
+# Look manpage via nvim
+export MANPAGER='nvim +Man!'
+export MANWIDTH=999

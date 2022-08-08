@@ -1,0 +1,28 @@
+#!/bin/sh
+# ALIASES
+
+# Colorize grep output (good for log files)
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# confirm before overwriting something
+alias cp="cp -i"
+alias mv='mv -i'
+alias rm='rm -i'
+
+# easier to read disk
+alias df='df -h'     # human-readable sizes
+alias free='free -m' # show sizes in MB
+
+# Bare git for Dotfiles
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# New ls
+alias ls='ls --color=auto'
+alias ll='ls -lav --ignore=..'   # show long listing of all except ".."
+alias l='ls -lav --ignore=.?*'   # show long listing but no hidden dotfiles except "."
+
+# Apps shortcuts
+alias vi='nvim'
+alias peerflix='peerflix -l -k'

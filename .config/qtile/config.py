@@ -151,6 +151,22 @@ keys = [
         desc='Move focus to next monitor'
         ),
 
+    # Floating controls
+    Key(
+        [mod],
+        "bracketleft",
+        lazy.group.prev_window(),
+        lazy.window.bring_to_front(),
+        desc="Cycle previous floating window",
+    ),
+    Key(
+        [mod],
+        "bracketright",
+        lazy.group.next_window(),
+        lazy.window.bring_to_front(),
+        desc="Cycle next floating windows",
+    ),
+
     # Volume commands
     Key([], "XF86AudioRaiseVolume",lazy.spawn("amixer set Master 3%+")),
     Key([], "XF86AudioLowerVolume",lazy.spawn("amixer set Master 3%-")),
@@ -167,8 +183,7 @@ keys = [
 
 # GROUPS
 
-groups = [Group(i) for i in "12345"]
-
+groups = [Group(i) for i in "123456789"]
 for i in groups:
     keys.extend([
         # mod1 + letter of group = switch to group
@@ -260,6 +275,8 @@ floating_layout = layout.Floating(**layout_theme, float_rules=[
     Match(wm_class='makebranch'),  # gitk
     Match(wm_class='maketag'),  # gitk
     Match(wm_class='ssh-askpass'),  # ssh-askpass
+    Match(wm_class='pavucontrol'),  # pavucontrol
+    Match(title='Confirm File Replacing'),  # File replace pcmanfm
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
 ])
@@ -327,7 +344,7 @@ screens = [
                     background=colors[1],
                     foreground=colors[6],
                     padding=4,
-                    fontsize=28,
+                    fontsize=25,
                 ),
                 # widget.Image(filename='~/.config/qtile/icons/python-white.png',
                 #             margin=0,
@@ -367,6 +384,7 @@ screens = [
                                 other_screen_border=colors[13],
                                 foreground=colors[2],
                                 background=colors[2],
+                                hide_unused=False,
                 ),
                 widget.TextBox(
                         text = '',
@@ -405,7 +423,7 @@ screens = [
                     background=colors[10],
                     padding=8,
                     max_chars=100,
-                    width=665,
+                    width=600,
                     fontsize=wid_font,
                     ),
                 widget.Sep(
@@ -520,9 +538,12 @@ screens = [
                            foreground=colors[6],
                            background=colors[6]),
             ],
-            28,  # height in px
+            size=25,  # height in px
             background=colors[0],  # background color
+            #border_color=colors[10][0],
+            #border_width=[2, 2, 2, 2],
             margin=[4, 4, 0, 4],
+            opacity=1,
          ), ),
  ]
 # MOUSE
@@ -538,8 +559,8 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
-main = None  # WARNING: this is deprecated and will be removed soon
-follow_mouse_focus = True
+# main = None  # WARNING: this is deprecated and will be removed soon
+follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
 auto_fullscreen = True

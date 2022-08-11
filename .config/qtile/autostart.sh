@@ -1,5 +1,5 @@
 #!/bin/sh
-feh --bg-fill /home/georgiy/Pictures/Wallpapers/nord-wallpapers/wild.png
+feh --bg-fill /home/georgiy/Pictures/Wallpapers/ign_waifu.png
 picom --experimental-backends --vsync --config ~/.config/picom/picom.conf & disown # --experimental-backends --vsync should prevent screen tearing on most setups if needed
 
 # Low battery notifier
@@ -21,6 +21,11 @@ yandex-disk start & disown
 
 # Clipboard menu daemon
 clipmenud & disown
+
+# Timeshift snapshots daemon
+timeshift & disown
+
+nm-applet &
 
 # Startup monitor change
 sleep 1

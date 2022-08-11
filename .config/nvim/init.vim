@@ -71,11 +71,12 @@ set t_Co=256                            " Support 256 colors
 set conceallevel=0                      " So that I can see `` in markdown files
 "set cursorline                           Enable highlighting of the current line
 set showtabline=2                       " Always show tabs
-set noshowmode                          " We don't need to see things like -- INSERT -- anymore
+" set noshowmode                          " We don't need to see things like -- INSERT -- anymore
 "set nobackup                             This is recommended by coc
 "set nowritebackup                        This is recommended by coc
 set formatoptions-=cro                  " Stop newline continution of comments
 set clipboard=unnamedplus               " Copy paste between vim and everything else
+set clipboard=unnamed
 "set autochdir                           - Your working directory will always be the same as your working directory
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 
@@ -110,8 +111,8 @@ nnoremap <M-l>    :vertical resize +2<CR>
 "inoremap kj <Esc>
 
 " Easy CAPS
-inoremap <c-u> <ESC>viwUi
-nnoremap <c-u> viwU<Esc>
+" inoremap <c-u> <ESC>viwUi
+" nnoremap <c-u> viwU<Esc>
 
 " TAB in general mode will move to text buffer
 nnoremap <TAB> :bnext<CR>
@@ -141,4 +142,8 @@ nnoremap <Leader>o o<Esc>^Da
 nnoremap <Leader>O O<Esc>^Da
 
 " escape highlight search
-nnoremap <esc><esc> :noh<return><esc> 
+nnoremap <esc><esc> :noh<return><esc>
+
+" Breaking undo in insert when delete
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>

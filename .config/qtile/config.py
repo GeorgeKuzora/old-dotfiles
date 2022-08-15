@@ -2,7 +2,7 @@ import os
 import subprocess
 from libqtile import qtile, bar, layout, widget, hook
 from libqtile.lazy import lazy
-from libqtile.config import Key, Group, Match, Screen, Click, Drag
+from libqtile.config import Key, Group, Match, Screen, Click, Drag, ScratchPad, DropDown
 from libqtile.command import lazy
 
 # KEYMAPPING
@@ -112,9 +112,11 @@ keys = [
     
     # Essenttial apps spawn commands
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    Key([mod], "r", lazy.spawn("rofi -show combi"), desc="spawn rofi"),
+    Key([mod], "r", lazy.spawn("rofi -show run"), desc="spawn rofi run"),
+    Key([mod], "e", lazy.spawn("rofi -show drun"), desc="run apps from rofi"),
+    Key([mod], "w", lazy.spawn("rofi -show window -window-format '{w} {c} {t}'"), desc="run apps from rofi"),
     Key([mod], "period", lazy.spawn("rofi -show emoji"), desc="spawn rofi emoji panel"),
-    Key([mod], "comma", lazy.spawn("clipmenu"), desc="spawn clipboard menu"),
+    Key([mod], "comma", lazy.spawn("clipmenu -p 'Clipboard:'"), desc="spawn clipboard menu"),
     Key([mod, "shift"],
         "r",
         lazy.spawncmd(),
@@ -123,27 +125,36 @@ keys = [
         lazy.spawn(myBrowser),
         desc='My browser'
         ),
-    Key([mod, "shift"], "v",
+    Key([mod], "v",
         lazy.spawn(myFilebrowser),
         desc='My GUI file browser'
         ),
-    Key([mod], "v",
+    Key([mod, "shift"], "v",
         lazy.spawn('alacritty -e "ranger"'),
         desc='My GUI file browser'
         ),
     Key([mod], "c",
+        lazy.spawn('code'),
+        desc='VScode editor'
+        ),
+    Key([mod, "shift"], "c",
         lazy.spawn(myCode),
         desc='My code editor'
         ),
-    Key([mod], "o",
+    Key([mod], "n",
         lazy.spawn("obsidian"),
         desc='My Obsidian'
         ),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
     Key([], "Print",
         lazy.spawn("flameshot gui"),
         desc='Take screenshot'
         ),
+    Key(
+        [mod],
+        "d",
+        lazy.group["scratchpad"].dropdown_toggle("term"),
+        desc="Toggle dropdown terminal",),
 
     # Switch focus of monitors
     Key([mod], "slash",
@@ -183,31 +194,126 @@ keys = [
 
 # GROUPS
 
-groups = [Group(i) for i in "123456789"]
-for i in groups:
+groups = [
+    Group("1", label=""),
+    Group("2", label=""),
+    Group("3", label=""),
+    Group("4", label=""),
+    Group("5", label=""),
+    Group("6", label=""),
+    Group("7", label=""),
+    Group("8", label=""),
+    Group("9", label=""),
+]
+#              ﭮ                       
+for i, group in enumerate(groups):
+    actual_key = str(i + 1)
     keys.extend([
         # mod1 + letter of group = switch to group
         Key([mod],
-            i.name,
-            lazy.group[i.name].toscreen(),
-            desc="Switch to group {}".format(i.name)),
+            actual_key,
+            lazy.group[group.name].toscreen(toggle=True),
+            desc="Switch to group"),
 
+        # mod1 + shift + letter of group = switch to & move focused window to group
+        Key([mod, "shift"],
+            actual_key,
+            lazy.window.togroup(group.name, switch_group=True),
+            desc="Switch to & move focused window to group"),
+        # Or, use below if you prefer not to switch to that group.
+        # # mod1 + shift + letter of group = move focused window to group
+        Key([mod, "control"], actual_key, lazy.window.togroup(group.name),
+            desc="move focused window to group"),
+
+        # mod1 + arrow = switch to next/previous group
         Key([mod], "Right", lazy.screen.next_group(),
             desc="Switch to next group"),
 
         Key([mod], "Left", lazy.screen.prev_group(),
             desc="Switch to previous group"),
-
-        # mod1 + shift + letter of group = switch to & move focused window to group
-        Key([mod, "shift"],
-            i.name,
-            lazy.window.togroup(i.name, switch_group=True),
-            desc="Switch to & move focused window to group {}".format(i.name)),
-        # Or, use below if you prefer not to switch to that group.
-        # # mod1 + shift + letter of group = move focused window to group
-        Key([mod, "control"], i.name, lazy.window.togroup(i.name),
-            desc="move focused window to group {}".format(i.name)),
     ])
+
+groups.append(
+    ScratchPad(
+        "scratchpad",
+        [
+            DropDown(
+                "term",
+                "alacritty --class dropdown",
+                #opacity=1,
+                x=0.1,
+                y=0.15,
+                width=0.8,
+                height=0.7,
+                on_focus_lost_hide=True,
+            ),
+        ],
+    )
+)
+
+
+
+
+# KEYS HELP
+def show_keys(keys):
+    """
+    print current keybindings in a pretty way for a rofi/dmenu window.
+    """
+    key_help = ""
+    keys_ignored = (
+        "XF86AudioMute",  #
+        "XF86AudioLowerVolume",  #
+        "XF86AudioRaiseVolume",  #
+        "XF86AudioPlay",  #
+        "XF86AudioNext",  #
+        "XF86AudioPrev",  #
+        "XF86AudioStop",
+    )
+    text_replaced = {
+        "mod4": "[S]",  #
+        "control": "[Ctl]",  #
+        "mod1": "[Alt]",  #
+        "shift": "[Shf]",  #
+        "twosuperior": "²",  #
+        "less": "<",  #
+        "ampersand": "&",  #
+        "Escape": "Esc",  #
+        "Return": "Enter",  #
+    }
+    for k in keys:
+        if k.key in keys_ignored:
+            continue
+
+        mods = ""
+        key = ""
+        desc = k.desc.title()
+        for m in k.modifiers:
+            if m in text_replaced.keys():
+                mods += text_replaced[m] + " + "
+            else:
+                mods += m.capitalize() + " + "
+
+        if len(k.key) > 1:
+            if k.key in text_replaced.keys():
+                key = text_replaced[k.key]
+            else:
+                key = k.key.title()
+        else:
+            key = k.key
+
+        key_line = "{:<25} {}".format(mods + key, desc + "\n")
+        key_help += key_line
+
+        # debug_print(key_line)  # debug only
+
+    return key_help
+
+
+# this must be done AFTER all the keys have been defined
+keys.extend(
+    [Key([mod], "F1", lazy.spawn("sh -c 'echo \"" + show_keys(keys) +
+         "\" | rofi -theme ~/.config/rofi/configTall.rasi -dmenu -p \"Keys:\" -i'"), desc="Print keyboard bindings")]
+)
 
 # COLOUR SCHEME
 # Gruvbox like scheme
@@ -339,7 +445,7 @@ screens = [
                            background=colors[1]),
                 widget.TextBox(
                     text='❆',
-                    font="Font Awesome 6 Free",
+                    font="JetBrainsMonoMedium Nerd Font Mono",
                     mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(os.path.expanduser('~/.config/rofi/powermenu.sh'))},
                     background=colors[1],
                     foreground=colors[6],
@@ -365,8 +471,8 @@ screens = [
                            background=colors[2],
                            foreground=colors[2],), 
                 widget.GroupBox(
-                                font="JetBrainsMonoMedium Nerd Font Mono", # "Font Awesome 6 Free",
-                                fontsize=14,
+                                font="JetBrainsMonoMedium Nerd Font Mono",
+                                fontsize=25,
                                 spacing=8,
                                 margin_y=3,
                                 margin_x=0,

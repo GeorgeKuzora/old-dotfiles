@@ -1,0 +1,28 @@
+configuration{
+    modi: "run,drun,window";
+    show-icons: true;
+    terminal: "alacritty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
+    disable-history: false;
+    hide-scrollbar: true;
+    display-Network: "󰤨";
+    display-ssh:    "";
+    display-run:    "";
+    display-drun:   "";
+    display-window: "";
+    display-combi:  "";
+    sidebar-mode: true;
+    line-margin: 10;
+}
+
+@theme "~/.config/rofi/nord.rasi"
+
+window {
+    height: 500px;
+}
+
+listview {
+    columns: 1;
+}
+

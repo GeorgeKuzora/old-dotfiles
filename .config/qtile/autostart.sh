@@ -22,10 +22,14 @@ yandex-disk start & disown
 # Clipboard menu daemon
 clipmenud & disown
 
-# Timeshift snapshots daemon
-timeshift & disown
+# Swiching audio devices after connect
+pactl load-module module-switch-on-connect & disown
 
+# Network manager applet
 nm-applet &
+
+# Volume manager applet
+pasystray &
 
 # Startup monitor change
 sleep 1

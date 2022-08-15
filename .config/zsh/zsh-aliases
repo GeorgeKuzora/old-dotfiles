@@ -25,4 +25,5 @@ alias l='ls -lav --ignore=.?* --color=auto --group-directories-first'   # show l
 
 # Apps shortcuts
 alias vi='nvim'
+alias vim='nvim'
 alias peerflix='peerflix -l -k'

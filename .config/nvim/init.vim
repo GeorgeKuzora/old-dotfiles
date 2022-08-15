@@ -45,7 +45,7 @@ set autoread                                        " Automatically re-read file
 set backspace=indent,eol,start                      " Allow backspacing over indention, line breaks and insertion start.
 set dir=~/.cache/nvim                               " Directory to store backup files.
 set dir=~/.cache/nvim                               " Directory to store swap files.
-set undodir=~/.config/nvim/undodir                  " set undofiles dir
+set undodir=~/.cache/nvim/undodir                  " set undofiles dir
 set undofile                                        " set undofiles
 set confirm                                         " Display a confirmation dialog when closing an unsaved file.
 set formatoptions+=j                                " Delete comment characters when joining lines.

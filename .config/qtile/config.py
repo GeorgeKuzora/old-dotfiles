@@ -155,6 +155,11 @@ keys = [
         "d",
         lazy.group["scratchpad"].dropdown_toggle("term"),
         desc="Toggle dropdown terminal",),
+    Key(
+        [mod],
+        "s",
+        lazy.group["scratchpad"].dropdown_toggle("vim_help"),
+        desc="Toggle dropdown terminal",),
 
     # Switch focus of monitors
     Key([mod], "slash",
@@ -198,7 +203,7 @@ groups = [
     Group("1", label=""),
     Group("2", label=""),
     Group("3", label=""),
-    Group("4", label=""),
+    Group("4", label=""),
     Group("5", label=""),
     Group("6", label=""),
     Group("7", label=""),
@@ -240,6 +245,16 @@ groups.append(
             DropDown(
                 "term",
                 "alacritty --class dropdown",
+                #opacity=1,
+                x=0.1,
+                y=0.15,
+                width=0.8,
+                height=0.7,
+                on_focus_lost_hide=True,
+            ),
+            DropDown(
+                "vim_help",
+                "marktext Documents/Code/Learn-Vim",
                 #opacity=1,
                 x=0.1,
                 y=0.15,
@@ -349,12 +364,12 @@ colors = [["#2E3440", "#2E3440"],#0 Polar Night 1
 
 layout_theme = {"border_width": 2,
                 "margin": [4, 2, 0, 4],
-                "border_focus": colors[7][0], #2 Pale yellow
+                "border_focus": colors[12][0], #2 Pale yellow
                 "border_normal": colors[2][0] #7 blue-green
                 }
 MonadTall_theme = {"border_width": 2,
                    "margin": 4,
-                   "border_focus": colors[7][0], #2 Pale yellow
+                   "border_focus": colors[13][0], #2 Pale yellow
                    "border_normal": colors[2][0] #7 blue-green
                    }
 

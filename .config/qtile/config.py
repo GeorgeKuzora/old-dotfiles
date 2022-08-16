@@ -364,13 +364,13 @@ colors = [["#2E3440", "#2E3440"],#0 Polar Night 1
 
 layout_theme = {"border_width": 2,
                 "margin": [4, 2, 0, 4],
-                "border_focus": colors[12][0], #2 Pale yellow
-                "border_normal": colors[2][0] #7 blue-green
+                "border_focus": colors[13][0], 
+                "border_normal": colors[2][0] 
                 }
 MonadTall_theme = {"border_width": 2,
                    "margin": 4,
-                   "border_focus": colors[13][0], #2 Pale yellow
-                   "border_normal": colors[2][0] #7 blue-green
+                   "border_focus": colors[13][0], 
+                   "border_normal": colors[2][0] 
                    }
 
 layouts = [

@@ -96,54 +96,47 @@ vim.cmd [[set grepprg=rg\ --vimgrep\ --smart-case\ --follow]]   -- Better grep c
 g.mapleader = ' '
 g.maplocalleader = ' '
 vim.keymap.set('i', 'ii', '<ESC>')
+-- Better nav for omnicomplete
+vim.keymap.set('i', '<C-j>', '<C-n>')
+vim.keymap.set('i', '<C-k>', '<C-p>')
+-- Use alt + hjkl to resize windows
+vim.keymap.set('n', '<M-j>', ':resize -2<CR>')
+vim.keymap.set('n', '<M-k>', ':resize +2<CR>')
+vim.keymap.set('n', '<M-h>', ':vertical resize -2<CR>')
+vim.keymap.set('n', '<M-l>', ':vertical resize +2<CR>')
+-- TAB in general mode will move to text buffer
+vim.keymap.set('n', '<TAB>', ':bnext<CR>')
+vim.keymap.set('n', '<S-TAB>', ':bprevious<CR>')
+-- Alternate way to save
+vim.keymap.set('n', '<C-s>', ':w<CR>')
+-- Alternate way to quit
+vim.keymap.set('n', '<C-Q>', ':wq!<CR>')
+-- Use control-c instead of escape
+vim.keymap.set('n', '<C-c>', '<Esc>')
 
-vim.cmd [[
-" Better nav for omnicomplete
-inoremap <expr> <c-j> ("\<C-n>")
-inoremap <expr> <c-k> ("\<C-p>")
+-- <TAB>: completion.
+vim.keymap.set('i', '<Tab>', function()
+    return vim.fn.pumvisible() == 1 and '<C-N>' or '<Tab>'
+end, {expr = true})
 
-" Use alt + hjkl to resize windows
-nnoremap <M-j>    :resize -2<CR>
-nnoremap <M-k>    :resize +2<CR>
-nnoremap <M-h>    :vertical resize -2<CR>
-nnoremap <M-l>    :vertical resize +2<CR>
+-- Better tabbing
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
+-- Better window navigation
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
+-- Create empty line without insert mode
+vim.keymap.set('n', '<Leader>o', 'o<Esc>')
+vim.keymap.set('n', '<Leader>O', 'O<Esc>')
+-- escape highlight search
+vim.keymap.set('n', '<esc><esc>', ':noh<return><esc>')
+-- Breaking undo in insert when delete
+vim.keymap.set('i', '<c-u>', '<c-g>u<c-u>')
+vim.keymap.set('i', '<c-w>', '<c-g>u<c-w>')
 
-
-
-" TAB in general mode will move to text buffer
-nnoremap <TAB> :bnext<CR>
-" SHIFT-TAB will go back
-nnoremap <S-TAB> :bprevious<CR>
-
-" Alternate way to save
-nnoremap <C-s> :w<CR>
-" Alternate way to quit
-nnoremap <C-Q> :wq!<CR>
-" Use control-c instead of escape
-nnoremap <C-c> <Esc>
-" <TAB>: completion.
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Better tabbing
-vnoremap < <gv
-vnoremap > >gv
-
-" Better window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-nnoremap <Leader>o o<Esc>^Da
-nnoremap <Leader>O O<Esc>^Da
-
-" escape highlight search
-nnoremap <esc><esc> :noh<return><esc>
-
-" Breaking undo in insert when delete
-inoremap <c-u> <c-g>u<c-u>
-inoremap <c-w> <c-g>u<c-w>
-]]
+-- NOT IN USE
 --  nnoremap <leader>ff <cmd>Telescope find_files<cr>
 --  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 --  nnoremap <leader>fb <cmd>Telescope buffers<cr>

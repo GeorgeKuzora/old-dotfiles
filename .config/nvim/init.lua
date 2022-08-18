@@ -51,8 +51,8 @@ opt.foldenable = false      -- Enable folding by default.
 -- undoing
 opt.autoread = true            -- Automatically re-read files if unmodified inside Vim.
 opt.backspace = {'indent', 'eol', 'start'}  -- Allow backspacing over indention, line breaks and insertion start.
-opt.dir = '~/.cache/nvim '  -- Directory to store backup files.
-opt.undodir = '~/.cache/nvim/undodir'   -- Set undofiles dir
+opt.dir = '/home/georgiy/.cache/nvim '  -- Directory to store backup files.
+opt.undodir = '/home/georgiy/.cache/nvim/undodir'   -- Set undofiles dir
 opt.undofile = true         -- Set undofiles
 o.swapfile = false          -- Set swapfile
 opt.confirm = true          -- Display a confirmation dialog when closing an unsaved file.
@@ -135,9 +135,22 @@ vim.keymap.set('n', '<esc><esc>', ':noh<return><esc>')
 -- Breaking undo in insert when delete
 vim.keymap.set('i', '<c-u>', '<c-g>u<c-u>')
 vim.keymap.set('i', '<c-w>', '<c-g>u<c-w>')
+-- Quick registers look
+vim.keymap.set('n', '<Leader>,', ':registers<CR>')
+-- Quick buffers look
+vim.keymap.set('n', '<Leader>.', ':buffers<CR>')
+
 
 -- NOT IN USE
 --  nnoremap <leader>ff <cmd>Telescope find_files<cr>
 --  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 --  nnoremap <leader>fb <cmd>Telescope buffers<cr>
 --  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+-- PLUGINS --
+-- Only required if you have packer configured as `opt`
+-- vim.cmd [[packadd packer.nvim]]
+return require('packer').startup(function()
+  -- Packer can manage itself
+  use 'wbthomason/packer.nvim'
+end)

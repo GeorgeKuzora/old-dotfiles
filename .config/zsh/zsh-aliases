@@ -20,8 +20,8 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # New ls
 alias ls='ls --color=auto'
-alias ll='ls -lav --ignore=.. --color=auto --group-directories-first'   # show long listing of all except ".."
-alias l='ls -lav --ignore=.?* --color=auto --group-directories-first'   # show long listing but no hidden dotfiles except "."
+alias ll='ls -lavh --ignore=.. --color=auto --group-directories-first'   # show long listing of all except ".."
+alias l='ls -lavh --ignore=.?* --color=auto --group-directories-first'   # show long listing but no hidden dotfiles except "."
 
 # Apps shortcuts
 alias vi='nvim'

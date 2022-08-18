@@ -1,13 +1,13 @@
 #!/bin/sh
+sleep 1
 intern=eDP
 extern=HDMI-A-0
-
-sleep 1
-
+hdmi_sink="alsa_output.pci-0000_04_00.1.hdmi-stereo"
 if xrandr | grep "$extern disconnected"; then
-    autorandr autorandr --load docked --force
+    xrandr --output eDP --mode 1920x1080
 else
-    autorandr autorandr --load mobile
+    xrandr --output HDMI-A-0 --primary --mode 1920x1080 --left-of eDP --mode 1920x1080
+    pactl set-default-sink $hdmi_sink
 fi
     
     

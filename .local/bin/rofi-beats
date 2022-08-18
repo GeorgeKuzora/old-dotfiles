@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# add more args here according to preference
+ARGS="--volume=60"
+
+notification(){
+	# change the icon to whatever you want.
+	# make sure your notification server supports it and is already configured.
+	# '&' protects script from a dead notification server
+	notify-send --icon=media-tape "Playing now: " "$* ☕️🎶" &
+}
+
+playstream(){
+	# the sh wrapper is necessary to be able to pass paths/args with spaces
+	# exec is necessary to get rid of the sh wrapper - not so sure about this
+	# the title arg is necessary to kill only this instance of mpv
+	bash -c "exec mpv --title=radio-mpv --no-video $ARGS $* & disown" 
+}
+
+declare -A streams
+
+# You can actually put anything mpv can run like multiple urls,
+# playlists, or folders with songs/videos. And also mpv args!
+
+streams["1. Lofi Girl"]="https://play.streamafrica.net/lofiradio"
+streams["2. Chillhop"]="https://stream.zeno.fm/fyn8eh3h5f8uv"
+streams["3. Box Lofi"]="https://stream.zeno.fm/f3wvbbqmdg8uv"
+streams["4. The Bootleg Boy"]="https://stream.zeno.fm/0r0xa792kwzuv"
+streams["5. Radio Spinner"]="https://live.radiospinner.com/lofi-hip-hop-64"
+streams["6. SmoothChill"]="https://media-ssl.musicradio.com/SmoothChill"
+streams["7. ChillSynth FM"]="https://www.youtube.com/watch?v=UedTcufyrHc"
+# streams["   My Musics"]="${XDG_MUSIC_DIR:-$HOME/Music}" # Musics folder
+
+
+main() {
+	choice=$(printf "%s\n" "${!streams[@]}" | sort -g | rofi -dmenu)
+	[[ -n "$choice" && -n "${streams[$choice]}" ]] || return 0
+
+	notification "$(echo "$choice" | cut -d' ' -f2-)" # Remove first column
+	playstream "${streams[$choice]}"
+}
+
+pkill -f '^mpv --title=radio-mpv' || main

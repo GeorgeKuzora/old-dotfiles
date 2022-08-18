@@ -5,13 +5,19 @@ from libqtile.lazy import lazy
 from libqtile.config import Key, Group, Match, Screen, Click, Drag, ScratchPad, DropDown
 from libqtile.command import lazy
 
+# MY FUNCTIONS
+
+@lazy.function
+def rofi_scripts(qtile):
+    subprocess.run("selected=$(ls /home/georgiy/.local/bin/ | rofi -dmenu -p 'Run: ')&&bash /home/georgiy/.local/bin/$selected", shell=True)
+
 # KEYMAPPING
 
 mod = "mod4" # My mod key of choice - windows key
 terminal = "alacritty" # My browser of choice
 myBrowser = "brave" # My browser of choice
 myFilebrowser = "pcmanfm" # My filemanager of choice
-myCode = 'alacritty -e "nvim"' # My text editor of choice
+myCode = 'code' # My text editor of choice
 
 keys = [
     # Switch between windows
@@ -60,14 +66,14 @@ keys = [
         # lazy.layout.grow_right(),
         # desc="Grow window to the right"
         ),
-    # Key([mod, "control"],
-    #     "j",
-    #     lazy.layout.grow_down(),
-    #     desc="Grow window down"),
-    # Key([mod, "control"],
-    #     "k",
-    #     lazy.layout.grow_up(),
-    #     desc="Grow window up"),
+    Key([mod, "control"],
+        "j",
+        lazy.layout.grow_down(),
+        desc="Grow window down"),
+    Key([mod, "control"],
+        "k",
+        lazy.layout.grow_up(),
+        desc="Grow window up"),
     Key([mod],
         "n",
         lazy.layout.normalize(),
@@ -115,6 +121,7 @@ keys = [
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="spawn rofi run"),
     Key([mod], "e", lazy.spawn("rofi -show drun"), desc="run apps from rofi"),
     Key([mod], "w", lazy.spawn("rofi -show window -window-format '{w} {c} {t}'"), desc="run apps from rofi"),
+    Key([mod], "t", rofi_scripts, desc="run scripts from rofi"),
     Key([mod], "period", lazy.spawn("rofi -show emoji"), desc="spawn rofi emoji panel"),
     Key([mod], "comma", lazy.spawn("clipmenu -p 'Clipboard:'"), desc="spawn clipboard menu"),
     Key([mod, "shift"],
@@ -134,14 +141,10 @@ keys = [
         desc='My GUI file browser'
         ),
     Key([mod], "c",
-        lazy.spawn('code'),
+        lazy.spawn(myCode),
         desc='VScode editor'
         ),
-    Key([mod, "shift"], "c",
-        lazy.spawn(myCode),
-        desc='My code editor'
-        ),
-    Key([mod], "n",
+    Key([mod], "x",
         lazy.spawn("obsidian"),
         desc='My Obsidian'
         ),
@@ -184,9 +187,9 @@ keys = [
     ),
 
     # Volume commands
-    Key([], "XF86AudioRaiseVolume",lazy.spawn("amixer set Master 3%+")),
-    Key([], "XF86AudioLowerVolume",lazy.spawn("amixer set Master 3%-")),
-    Key([], "XF86AudioMute",lazy.spawn("amixer set Master toggle")),
+    Key([], "XF86AudioRaiseVolume",lazy.spawn("pamixer -i 3")),
+    Key([], "XF86AudioLowerVolume",lazy.spawn("pamixer -d 3")),
+    Key([], "XF86AudioMute",lazy.spawn("pamixer -t")),
     # Brithness commands
     Key([], "XF86MonBrightnessUp",
         lazy.spawn("brightnessctl s 20+"),
@@ -196,6 +199,7 @@ keys = [
         lazy.spawn("brightnessctl s 20-"),
         desc='Function Key'),
 ]
+
 
 # GROUPS
 
@@ -266,9 +270,6 @@ groups.append(
     )
 )
 
-
-
-
 # KEYS HELP
 def show_keys(keys):
     """
@@ -331,17 +332,7 @@ keys.extend(
 )
 
 # COLOUR SCHEME
-# Gruvbox like scheme
-# colors = [["#282828", "#282828"],#0 Very Dark
-#           ["#32302f", "#32302f"],#1 Dark
-#           ["#ebdbb2", "#ebdbb2"],#2 Pale yellow
-#           ["#ff6c6b", "#ff6c6b"],#3 Rose
-#           ["#b8bb26", "#b8bb26"],#4 green-yellow
-#           ["#fabd2f", "#fabd2f"],#5 oranje
-#           ["#b16286", "#b16286"],#6 magnete
-#           ["#458588", "#458588"],#7 blue-green
-#           ["#3c3836", "#3c3836"],#8 dark brown
-#           ["#00000000", "#00000000"]]#9
+
 # Nord scheme
 colors = [["#2E3440", "#2E3440"],#0 Polar Night 1
           ["#3B4252", "#3B4252"],#1 Polar Night 2
@@ -360,6 +351,7 @@ colors = [["#2E3440", "#2E3440"],#0 Polar Night 1
           ["#A3BE8C", "#A3BE8C"],#14 Aurora 4 green
           ["#B48EAD", "#B48EAD"],#15 Aurora 5 purpur
           ["#00000000", "#00000000"]]#16 Transparent
+
 # LAYOUTS
 
 layout_theme = {"border_width": 2,
@@ -406,47 +398,12 @@ floating_layout = layout.Floating(**layout_theme, float_rules=[
 
 widget_defaults = dict(
                     font='JetBrainsMono Nerd Font Bold',
-                    fontsize=14,
+                    fontsize=13,
                     # padding=2,
                     # background=colors[2]
                     )
 
 extension_defaults = widget_defaults.copy()
-class MyVolume(widget.Volume):
-    def _configure(self, qtile, bar):
-        widget.Volume._configure(self, qtile, bar)
-        self.volume = self.get_volume()
-        if self.volume <= 0:
-            self.text = ''
-        elif self.volume <= 15:
-            self.text = ''
-        elif self.volume < 50:
-            self.text = ''
-        else:
-            self.text = ''
-        # drawing here crashes Wayland
-
-    def _update_drawer(self, wob=False):
-        if self.volume <= 0:
-            self.text = ''
-        elif self.volume <= 15:
-            self.text = ''
-        elif self.volume < 50:
-            self.text = ''
-        else:
-            self.text = ''
-        self.draw()
-
-        if wob:
-            with open(self.wob, 'a') as f:
-                f.write(str(self.volume) + "\n")
-
-volume = MyVolume(
-    foreground=colors[2],
-    background=colors[0],
-    fmt='Vol:{} ',
-    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")}
-)
 wid_font = 13
 # SCREENS
 
@@ -467,24 +424,19 @@ screens = [
                     padding=4,
                     fontsize=25,
                 ),
-                # widget.Image(filename='~/.config/qtile/icons/python-white.png',
-                #             margin=0,
-                #             background=colors[5],
-                #             foreground=colors[5],
-                #             mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(os.path.expanduser('~/.config/rofi/powermenu.sh'))}
-                #              ),
+
                 widget.TextBox(
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[2],
+                    background=colors[3],
                     foreground=colors[1],
                     padding=0,
                     fontsize=30,
                 ),
                 widget.Sep(padding=8,
                            linewidth=0,
-                           background=colors[2],
-                           foreground=colors[2],), 
+                           background=colors[3],
+                           foreground=colors[3],), 
                 widget.GroupBox(
                                 font="JetBrainsMonoMedium Nerd Font Mono",
                                 fontsize=25,
@@ -503,36 +455,41 @@ screens = [
                                 this_screen_border=colors[13],
                                 other_current_screen_border=colors[9],
                                 other_screen_border=colors[13],
-                                foreground=colors[2],
-                                background=colors[2],
+                                foreground=colors[3],
+                                background=colors[3],
                                 hide_unused=False,
                 ),
                 widget.TextBox(
                         text = '',
                         font="JetBrainsMonoMedium Nerd Font Mono",
-                        background=colors[3],
-                        foreground=colors[2],
+                        background=colors[1],
+                        foreground=colors[3],
                         padding=0,
                         fontsize=30,
                         ),
                 widget.CurrentLayout(
                     fmt=' {}',
                     foreground=colors[6],
-                    background=colors[3],
+                    background=colors[1],
                     padding=5,
                     fontsize=wid_font,
                 ),
                 widget.TextBox(
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[10],
-                    foreground=colors[3],
+                    background=colors[3],
+                    foreground=colors[1],
                     padding=0,
                     fontsize=30,
                 ),    
-                widget.Prompt(fontsize=wid_font,),
+                widget.Prompt(
+                    fontsize=wid_font,
+                    background=colors[3],
+                    foreground=colors[6],
+                    ),
                 widget.Chord(
                     fontsize=wid_font,
+                    background=colors[3],
                     chords_colors={
                         'launch': (colors[6]),
                     },
@@ -541,7 +498,7 @@ screens = [
                 widget.WindowName(
                     foreground=colors[6],
                     fmt='{}',
-                    background=colors[10],
+                    background=colors[3],
                     padding=8,
                     max_chars=100,
                     width=600,
@@ -550,25 +507,25 @@ screens = [
                 widget.Sep(
                     linewidth=0,
                     padding=0,
-                    foreground=colors[10],
-                    background=colors[10]
+                    foreground=colors[3],
+                    background=colors[3]
                 ),
                 widget.TextBox(
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[9],
-                    foreground=colors[10],
+                    background=colors[1],
+                    foreground=colors[3],
                     padding=0,
                     fontsize=37
                 ),
                 widget.Spacer(
-                    background=colors[9]
+                    background=colors[1]
                 ),
                 widget.Sep(
                     linewidth=0,
                     padding=6,
-                    foreground=colors[9],
-                    background=colors[9]
+                    foreground=colors[1],
+                    background=colors[1]
                 ),
                 # widget.Net(
                 #          interface = "wlan0",
@@ -578,64 +535,74 @@ screens = [
                 #         ),
                 widget.Systray(
                     # icon_size = 20,
-                    foreground=colors[0],
-                    background=colors[9],
+                    foreground=colors[6],
+                    background=colors[1],
                     fontsize=wid_font,
                     padding=8
                     ),
+                widget.TextBox(
+                    text='',
+                    font="JetBrainsMonoMedium Nerd Font Mono",
+                    background=colors[1],
+                    foreground=colors[3],
+                    padding=0,
+                    fontsize=37
+                    ),
                 widget.CPU(
-                        foreground = colors[0],
-                        background=colors[9],
+                        foreground = colors[6],
+                        background=colors[3],
                         fontsize=wid_font,
                         threshold = 90,
                         fmt = '{}',
                         padding = 5,
-                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
+                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e bashtop')},
                         ),
                 widget.TextBox(
-                    text='',
+                    text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[9],
-                    foreground=colors[8],
+                    background=colors[3],
+                    foreground=colors[1],
                     padding=0,
                     fontsize=37
                     ),
                 widget.Memory(
-                        foreground = colors[0],
-                        background = colors[8],
+                        foreground = colors[6],
+                        background = colors[1],
                         fontsize=wid_font,
-                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e htop')},
+                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e bashtop')},
                         fmt = 'Mem:{}',
                         format='{MemUsed:.1f}{mm}',
                         measure_mem='G',
                         ),
+                # widget.TextBox(
+                #     text='',
+                #     font="JetBrainsMonoMedium Nerd Font Mono",
+                #     background=colors[3],
+                #     foreground=colors[1],
+                #     padding=0,
+                #     fontsize=30
+                # ),
+                # widget.Pomodoro(
+                #     background=colors[1],
+                #     foreground=colors[6],
+                #     color_active=colors[14],
+                #     color_break=colors[13],
+                #     color_inactive=colors[6],
+                #     fontsize=wid_font,
+                #     padding=5,
+                #     fmt='{}',
+                # ),
                 widget.TextBox(
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[8],
-                    foreground=colors[7],
-                    padding=0,
-                    fontsize=30
-                ),
-                widget.Volume(
-                    foreground=colors[0],
-                    background=colors[7],
-                    fontsize=wid_font,
-                    fmt='Vol:{} ',
-                    padding=5,
-                    mouse_callbacks = {'Button3': lambda: qtile.cmd_spawn("pavucontrol")}
-                ),
-                widget.TextBox(
-                    text='',
-                    font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[7],
-                    foreground=colors[4],
+                    background=colors[1],
+                    foreground=colors[3],
                     padding=0,
                     fontsize=30
                     ),
                 widget.Battery(
-                     foreground=colors[0],
-                     background=colors[4],
+                     foreground=colors[6],
+                     background=colors[3],
                      fontsize=wid_font,
                      format='{percent:2.0%}',
                      padding=2
@@ -643,21 +610,21 @@ screens = [
                 widget.TextBox(
                     text='',
                     font="JetBrainsMonoMedium Nerd Font Mono",
-                    background=colors[4],
-                    foreground=colors[6],
+                    background=colors[3],
+                    foreground=colors[1],
                     padding=0,
                     fontsize=30
                 ),
                 widget.Clock(format='%d-%m %a %H:%M',
-                             foreground=colors[0],
-                             background=colors[6],
+                             foreground=colors[6],
+                             background=colors[1],
                              fontsize=wid_font,
                              padding=2,
                              ),
                 widget.Sep(padding=10,
                            linewidth=0,
-                           foreground=colors[6],
-                           background=colors[6]),
+                           foreground=colors[1],
+                           background=colors[1]),
             ],
             size=25,  # height in px
             background=colors[0],  # background color
@@ -667,6 +634,7 @@ screens = [
             opacity=1,
          ), ),
  ]
+
 # MOUSE
 
 # Drag floating layouts.

@@ -55,5 +55,13 @@ zsh_add_file "zsh-prompt"
 zsh_add_plugin "zsh-autosuggestions"
 zsh_add_plugin "zsh-syntax-highlighting"
 
+zsh_add_plugin "zsh-history-substring-search"
+# Bindkeys for "zsh-history-substring-search"
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
+zsh_add_plugin "zsh-auto-notify"
+# Auto notify options
+AUTO_NOTIFY_IGNORE+=("bashtop")
 
+zsh_add_plugin "zsh-you-should-use"

@@ -4,7 +4,7 @@
  *******************************************************/
 
 configuration {
-    font:                           "Cascadia Code 12";
+    font:                           "JetBrainsMono Nerd Font 12";
     show-icons:                     false;
     icon-theme: 		    "Arc-X-D";
     scroll-method:                  0;

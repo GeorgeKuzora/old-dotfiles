@@ -29,8 +29,14 @@ export IMAGE="qimgv"
 export OPENER="xdg-open"
 export PAGER="less"
 export WM="qtile"
-
-
+# history file location
+export HISTFILE="${XDG_STATE_HOME}"/bash/history
 # Добавление директорий в PATH
 PATH="$PATH:$HOME/.local/bin"
 export PATH
+source /home/georgiy/.config/broot/launcher/bash/br
+
+export XCURSOR_PATH=/usr/share/icons:${XDG_DATA_HOME}/icons
+export LESSHISTFILE="$XDG_CACHE_HOME"/less/history
+export SQLITE_HISTORY="$XDG_CACHE_HOME"/sqlite_history
+export ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"

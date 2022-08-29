@@ -1,5 +1,6 @@
 #!/bin/sh
-feh --bg-fill "/home/georgiy/Pictures/Wallpapers/nord-wallpapers/undefined - Imgur.jpg"
+sh /home/georgiy/.local/bin/rofi_scripts/wallpaper_set & disown
+#feh --no-fehbg --bg-fill "/home/georgiy/Pictures/Wallpapers/nord-wallpapers/undefined - Imgur.jpg"
 picom --experimental-backends --vsync --config ~/.config/picom/picom.conf & disown # --experimental-backends --vsync should prevent screen tearing on most setups if needed
 
 # Low battery notifier
@@ -14,7 +15,7 @@ picom --experimental-backends --vsync --config ~/.config/picom/picom.conf & diso
 fcitx5 -d & disown
 
 # Keyboad layout change with xmodmap
-xmodmap ~/.Xmodmap & disown
+xmodmap ~/.config/.Xmodmap & disown
 
 # Yandex disk autostart
 yandex-disk start & disown
@@ -33,6 +34,13 @@ pasystray & disown
 
 # Notifications
 dunst & disown
+
+# player contol
+playerctld daemon & disown
+
+# Emacs server daemon
+emacs --daemon & disown
+
 # Startup monitor change
 sleep 1
 intern=eDP
@@ -42,5 +50,6 @@ if xrandr | grep "$extern disconnected"; then
     xrandr --output eDP --mode 1920x1080
 else
     xrandr --output HDMI-A-0 --primary --mode 1920x1080 --left-of eDP --mode 1920x1080
+    sleep 1
     pactl set-default-sink $hdmi_sink
 fi

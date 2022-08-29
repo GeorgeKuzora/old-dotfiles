@@ -27,3 +27,10 @@ alias l='ls -lavh --ignore=.?* --color=auto --group-directories-first'   # show 
 alias vi='nvim'
 alias vim='nvim'
 alias peerflix='peerflix -l -k'
+alias brh='br -h'
+alias v='nvim "/home/georgiy/Documents/Code/Learn-Vim/$(ls /home/georgiy/Documents/Code/Learn-Vim | fzf -e -i --cycle)"'
+alias emacs="emacsclient -c -a 'emacs' & disown"
+
+# history fuzzy find
+alias cpy='xclip -selection c'
+alias h="history 1 | cut -c 8- | sort | uniq | fzf | tr '\\n' ' ' | cpy"

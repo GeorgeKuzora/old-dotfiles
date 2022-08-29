@@ -65,3 +65,4 @@ zsh_add_plugin "zsh-auto-notify"
 AUTO_NOTIFY_IGNORE+=("bashtop")
 
 zsh_add_plugin "zsh-you-should-use"
+source /home/georgiy/.config/broot/launcher/bash/br

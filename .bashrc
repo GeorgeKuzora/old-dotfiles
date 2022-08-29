@@ -100,3 +100,5 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 pfetch
+
+source /home/georgiy/.config/broot/launcher/bash/br

@@ -10,7 +10,8 @@ configuration{
     display-ssh:    "";
     display-run:    "";
     display-drun:   "";
-    display-window: "";
+    /* display-window: ""; */
+    display-file-browser-extended:  "Files:";
     display-combi:  "";
     sidebar-mode: true;
     line-margin: 10;

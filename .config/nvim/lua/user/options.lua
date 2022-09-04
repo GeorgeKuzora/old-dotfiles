@@ -88,6 +88,7 @@ vim.cmd [[au! BufWritePost $MYVIMRC source %]]  -- auto source when writing to i
 opt.cp = false              -- 'compatible' is not set
 vim.cmd [[filetype plugin indent on]]   -- plugins are enabled
 vim.cmd [[set grepprg=rg\ --vimgrep\ --smart-case\ --follow]]   -- Better grep command
+vim.cmd [[set path+=/home/georgiy/Documents/Code]]
 
 -- mostly just for cmp
 opt.completeopt = { "menuone", "noselect" }

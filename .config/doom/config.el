@@ -21,19 +21,25 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "JetBrains Mono Nerd Font" :size 14 :weight 'medium)
-      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 14)
-      doom-big-font (font-spec :family "JetBrains Mono Nerd Font" :size 24)
-      doom-unicode-font (font-spec :family "JetBrains Mono Nerd Font"))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 14 :weight 'Medium)
+      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 14 :weight 'Medium)
+      doom-big-font (font-spec :family "JetBrainsMono Nerd Font" :size 24 :weight 'Medium)
+      doom-unicode-font (font-spec :family "Unifont"))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
+;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font'
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-nord)
+(load-theme 'doom-nord t)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -76,4 +82,16 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-;; load nord theme
+;;
+;;
+;; MY CONFIGURATION
+;;
+;; Display vertical line on column 80
+(global-display-fill-column-indicator-mode 1)
+;; Enable Evil mode exit Insert mode by 'ii'
+(use-package key-chord
+  :init
+  (setq key-chord-two-keys-delay 0.5)
+  :config
+  (key-chord-mode 1))
+  (key-chord-define evil-insert-state-map "ii" 'evil-normal-state)

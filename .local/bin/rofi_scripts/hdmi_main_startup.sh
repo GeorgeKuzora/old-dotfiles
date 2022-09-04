@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 sleep 1
 intern=eDP
 extern=HDMI-A-0

@@ -23,14 +23,15 @@ export MANPAGER='nvim +Man!'
 export MANWIDTH=999
 
 # Default Apps
-export EDITOR="nvim" #"emacsclient -c -a 'emacs'"
+export EDITOR="nvim"
 export READER="atril"
-export VISUAL="nvim" #"emacsclient -c -a 'emacs'"
+export VISUAL="nvim"
 export TERMINAL="alacritty"
 export BROWSER="brave"
 export VIDEO="mpv"
 export IMAGE="qimgv"
 # export COLORTERM="truecolor" # alacritty is 256 color terminal
+# export TERM=xterm-256color
 export OPENER="xdg-open"
 export PAGER="less"
 export WM="qtile"

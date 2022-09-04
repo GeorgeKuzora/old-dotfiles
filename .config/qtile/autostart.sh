@@ -1,6 +1,8 @@
-#!/bin/sh
-sh /home/georgiy/.local/bin/rofi_scripts/wallpaper_set & disown
+#!/bin/bash
+# Wallpaper set via script
+bash /home/georgiy/.local/bin/rofi_scripts/wallpaper_set & disown
 #feh --no-fehbg --bg-fill "/home/georgiy/Pictures/Wallpapers/nord-wallpapers/undefined - Imgur.jpg"
+# Enable picom compositor
 picom --experimental-backends --vsync --config ~/.config/picom/picom.conf & disown # --experimental-backends --vsync should prevent screen tearing on most setups if needed
 
 # Low battery notifier
@@ -9,13 +11,14 @@ picom --experimental-backends --vsync --config ~/.config/picom/picom.conf & diso
 # Start welcome
 # eos-welcome & disown
 
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & disown # start polkit agent from GNOME
+# start polkit agent from GNOME
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & disown 
 
 # Language manager fcitx5
 fcitx5 -d & disown
 
 # Keyboad layout change with xmodmap
-xmodmap ~/.config/.Xmodmap & disown
+xmodmap ~/.Xmodmap & disown
 
 # Yandex disk autostart
 yandex-disk start & disown
@@ -39,11 +42,14 @@ dunst & disown
 playerctld daemon & disown
 
 # Emacs server daemon
-emacs --daemon & disown
+#bash /home/georgiy/.local/bin/rofi_scripts/emacs_daemon & disown
+
+# Unclutter - hide cursor
+unclutter & disown
 
 # Startup monitor change
 sleep 1
-intern=eDP
+#intern=eDP
 extern=HDMI-A-0
 hdmi_sink="alsa_output.pci-0000_04_00.1.hdmi-stereo"
 if xrandr | grep "$extern disconnected"; then

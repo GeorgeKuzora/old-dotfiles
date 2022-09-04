@@ -3,9 +3,9 @@
 # Options for powermenu
 lock="    Lock"
 logout="    Logout"
-shutdown="    Shutdown"
+shutdown="⏻    Shutdown"
 reboot="    Reboot"
-sleep="   Sleep"
+sleep="🛏    Sleep"
 
 # Get answer from user via rofi
 selected_option=$(echo "$lock
@@ -14,13 +14,13 @@ $sleep
 $reboot
 $shutdown" | rofi -dmenu\
                   -i\
-                  -p "Power"\
+                  -p "Power:"\
                   -config "~/.config/rofi/powermenu.rasi"\
-                  -font "Cascadia Code 12"\
+                  # -font "JetBrainsMono Nerd Font Semibold 12"\
                   -width "15"\
-                  -lines 5\
-                  -line-margin 3\
-                  -line-padding 10\
+                  # -lines 5\
+                  # -line-margin 3\
+                  # -line-padding 10\
                   -scrollbar-width "0" )
 
 # Do something based on selected option

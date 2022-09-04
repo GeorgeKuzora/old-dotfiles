@@ -1,0 +1,20 @@
+#!/bin/bash
+emacs --daemon & disown
+
+# Default server socket location
+# This is queried with C-h v RET server-socket-dir RET in emacs
+# set server_socket_dir /var/folders/mk/wdnp3v29757bd0018d_64_z40000gn/T//emacs501
+
+ # read -p "echo 'Name of Emacs daemon (default is bg_emacs): '" name
+# if not test "$name"
+#    set name bg_emacs
+# end
+#
+# if not test $server-socket-dir/$name
+#    emacs --daemon=$name
+# end
+
+# emacs --daemon
+# Explicitly load init.el file otherwise font setting will not be correct
+#emacsclient  --socket-name=$name -c -n --eval '(load-file "~/.config/doom/init.el")'
+# emacsclient -c -n --eval '(load-file "~/.config/doom/init.el")'

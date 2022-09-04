@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/bin/bash
 feh --no-fehbg --bg-fill '/home/georgiy/Pictures/Wallpapers/nord-wallpapers/wp.jpg'

@@ -18,9 +18,9 @@ export CM_MAX_CLIPS=10
 export CM_LAUNCHER='rofi'
 
 # Default Apps
-export EDITOR="nvim"
+export EDITOR="emacsclient -c -a 'emacs'"
 export READER="zathura"
-export VISUAL="nvim"
+export VISUAL="emacsclient -c -a 'emacs'"
 export TERMINAL="alacritty"
 export BROWSER="brave"
 export VIDEO="mpv"

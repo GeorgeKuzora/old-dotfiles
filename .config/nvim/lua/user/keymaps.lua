@@ -6,11 +6,11 @@ vim.keymap.set('i', 'ii', '<ESC>')
 -- Better nav for omnicomplete
 vim.keymap.set('i', '<C-j>', '<C-n>')
 vim.keymap.set('i', '<C-k>', '<C-p>')
--- Use alt + hjkl to resize windows
-vim.keymap.set('n', '<M-j>', ':resize -2<CR>')
-vim.keymap.set('n', '<M-k>', ':resize +2<CR>')
-vim.keymap.set('n', '<M-h>', ':vertical resize -2<CR>')
-vim.keymap.set('n', '<M-l>', ':vertical resize +2<CR>')
+-- Use alt + arrows to resize windows
+vim.keymap.set('n', '<M-Up>', ':resize -2<CR>')
+vim.keymap.set('n', '<M-Down>', ':resize +2<CR>')
+vim.keymap.set('n', '<M-Left>', ':vertical resize -2<CR>')
+vim.keymap.set('n', '<M-Right>', ':vertical resize +2<CR>')
 -- TAB in general mode will move to text buffer
 vim.keymap.set('n', '<TAB>', ':bnext<CR>')
 vim.keymap.set('n', '<S-TAB>', ':bprevious<CR>')
@@ -47,13 +47,25 @@ vim.keymap.set('n', '<Leader>,', ':registers<CR>')
 -- Quick buffers look
 vim.keymap.set('n', '<Leader>.', ':buffers<CR>')
 -- Quick buffer delete
-vim.keymap.set('n', '<Leader>k', ':bdelete')
+vim.keymap.set('n', '<Leader>bk', ':bdelete<CR>')
+-- Quick marks look
+vim.keymap.set('n', '<Leader>m', ':marks<CR>')
 -- Nvimtree
-vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<cr>")
-
-
--- NOT IN USE
---  nnoremap <leader>ff <cmd>Telescope find_files<cr>
---  nnoremap <leader>fg <cmd>Telescope live_grep<cr>
---  nnoremap <leader>fb <cmd>Telescope buffers<cr>
---  nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+vim.keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>")
+-- Move text up and down
+vim.keymap.set("n", "<M-j>", "<Esc>:m .+1<CR>==")
+vim.keymap.set("n", "<M-k>", "<Esc>:m .-2<CR>==")
+-- Visual --
+-- Move text up and down
+vim.keymap.set("v", "<M-j>", ":m .+1<CR>==")
+vim.keymap.set("v", "<M-k>", ":m .-2<CR>==")
+vim.keymap.set("v", "p", '"_dP')
+-- Visual Block --
+-- Move text up and down
+vim.keymap.set("x", "<M-j>", ":move '>+1<CR>gv-gv")
+vim.keymap.set("x", "<M-k>", ":move '<-2<CR>gv-gv")
+-- Telescope
+vim.keymap.set("n", "<leader>ff", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>")
+vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+vim.keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+vim.keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")

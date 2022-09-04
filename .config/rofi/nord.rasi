@@ -41,7 +41,7 @@ window {
     location: center;
     anchor:   center;
     transparency: "screenshot";
-    padding: 10px;
+    padding: 2px;
     border:  0px;
     border-radius: 6px;
 
@@ -58,7 +58,7 @@ mainbox {
 
 message {
     color: @nord0;
-    padding: 5;
+    padding: 5px;
     border-color: @foreground;
     border:  0px 2px 2px 2px;
     background-color: @nord7;
@@ -66,8 +66,8 @@ message {
 
 inputbar {
     color: @nord6;
-    padding: 11px;
-    background-color: #3b4252;
+    padding: 10px;
+    background-color: #3b4252e6;
 
     border: 1px;
     border-radius:  6px 6px 0px 0px;
@@ -89,7 +89,7 @@ listview {
     border-radius: 0px 0px 6px 6px;
     border-color: @nord10;
     border: 0px 1px 1px 1px;
-    background-color: rgba(46,52,64,0.9);
+    background-color: #2e3440e6;
     dynamic: false;
 }
 

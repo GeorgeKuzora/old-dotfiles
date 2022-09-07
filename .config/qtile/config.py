@@ -2,24 +2,29 @@ import os
 import subprocess
 from libqtile import qtile, bar, layout, widget, hook
 from libqtile.lazy import lazy
-from libqtile.config import Key, Group, Match, Screen, Click, Drag, ScratchPad, DropDown
-from libqtile.command import lazy
-from mpris_widget import Mpris2
+from libqtile.config import Key, Group, Match, Screen, Click, Drag, ScratchPad
+from libqtile.config import DropDown
+
 
 # MY FUNCTIONS
 
+
 @lazy.function
 def rofi_scripts(qtile):
-    subprocess.run("selected=$(ls /home/georgiy/.local/bin/rofi_scripts | rofi -dmenu -p 'Run: ')&&bash /home/georgiy/.local/bin/rofi_scripts/$selected", shell=True)
+    subprocess.run("selected=$(ls /home/georgiy/.local/bin/rofi_scripts | \
+    rofi -dmenu -p 'Run: ')&&bash \
+    /home/georgiy/.local/bin/rofi_scripts/$selected", shell=True)
+
 
 # KEYMAPPING
 
-mod = "mod4" # My mod key of choice - windows key
-terminal = "alacritty" # My browser of choice
-myBrowser = "brave" # My browser of choice
-myFilebrowser = "pcmanfm" # My filemanager of choice
-myEmacs = "emacsclient -c -n -a 'emacs'" # My text editor of choice
-#myCode = "code" # My text editor of choice
+
+mod = "mod4"  # My mod key of choice - windows key
+terminal = "alacritty"  # My browser of choice
+myBrowser = "brave"  # My browser of choice
+myFilebrowser = "pcmanfm"  # My filemanager of choice
+myEmacs = "emacsclient -c -n -a 'emacs'"  # My text editor of choice
+# myCode = "code" # My text editor of choice
 keys = [
     # WINDOW MANAGMENT
     # Switch focus between windows
@@ -114,7 +119,7 @@ keys = [
         "space",
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack"),
-    
+
     # Svap and flip columns in column layout
     Key([mod, "shift", "control"], "h", lazy.layout.swap_column_left()),
     Key([mod, "shift", "control"], "l", lazy.layout.swap_column_right()),
@@ -122,31 +127,36 @@ keys = [
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle next layout"),
-    Key([mod, "shift"], "Tab", lazy.prev_layout(), desc="Toggle previous layout"),
-   
-    
+    Key([mod, "shift"], "Tab", lazy.prev_layout(), desc="Toggle previous\
+        layout"),
+
+
     # Power managment commands
     Key([mod, "control"], "r", lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "q", lazy.spawn(os.path.expanduser('~/.config/rofi/powermenu.sh')), desc="Shutdown Qtile"),
-    
-    
+    Key([mod], "q", lazy.spawn(os.path.expanduser('~/.config/rofi/powermenu.sh'
+                                                  )), desc="Shutdown Qtile"),
+
     # Essenttial apps spawn commands
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "r", lazy.spawn("rofi -show run"), desc="spawn rofi run"),
     Key([mod], "e", lazy.spawn("rofi -show drun"), desc="run apps from rofi"),
-    Key([mod], "w", lazy.spawn("rofi -show window -window-format '{w} {c} {t}' -theme ~/.config/rofi/configTall.rasi"), desc="run apps from rofi"),
+    Key([mod], "w", lazy.spawn("rofi -show window -window-format '{w} {c} {t}'\
+        -theme ~/.config/rofi/configTall.rasi"), desc="run apps from rofi"),
     Key([mod], "t", rofi_scripts, desc="run scripts from rofi"),
-        Key(
+    Key(
         [mod],
         "z",
         lazy.spawn(
-            "rofi -show file-browser-extended -file-browser-show-hidden -theme ~/.config/rofi/configTall.rasi -file-browser-cmd 'xdg-open'"
+            "rofi -show file-browser-extended -file-browser-show-hidden -theme\
+                ~/.config/rofi/configTall.rasi -file-browser-cmd 'xdg-open'"
         ),
         desc="Rofi find files",
     ),
-    Key([mod], "period", lazy.spawn("rofi -show emoji"), desc="spawn rofi emoji panel"),
-    Key([mod], "comma", lazy.spawn("clipmenu -p 'Clipboard:' -theme ~/.config/rofi/configTall.rasi"), desc="spawn clipboard menu"),
+    Key([mod], "period", lazy.spawn("rofi -show emoji"), desc="spawn rofi\
+        emoji panel"),
+    Key([mod], "comma", lazy.spawn("clipmenu -p 'Clipboard:' -theme\
+        ~/.config/rofi/configTall.rasi"), desc="spawn clipboard menu"),
     Key([mod, "shift"],
         "r",
         lazy.spawncmd(),
@@ -214,9 +224,9 @@ keys = [
     ),
 
     # Volume commands
-    Key([], "XF86AudioRaiseVolume",lazy.spawn("pamixer -i 3")),
-    Key([], "XF86AudioLowerVolume",lazy.spawn("pamixer -d 3")),
-    Key([], "XF86AudioMute",lazy.spawn("pamixer -t")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pamixer -i 3")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pamixer -d 3")),
+    Key([], "XF86AudioMute", lazy.spawn("pamixer -t")),
     # Brithness commands
     Key([], "XF86MonBrightnessUp",
         lazy.spawn("brightnessctl s 20+"),
@@ -234,15 +244,14 @@ keys = [
         desc="Play last audio",
     ),
     Key([mod], "F8", lazy.spawn("playerctl next"), desc="Play next audio"),
-    Key(
-        [mod], "F7", lazy.spawn("playerctl play-pause"), desc="Toggle play/pause audio"
-    ),
+    Key([mod], "F7", lazy.spawn("playerctl play-pause"),
+        desc="Toggle play/pause audio"),
     Key([mod], "F5", lazy.spawn("playerctl stop"), desc="Stop audio"),
-
 ]
 
 
 # GROUPS
+
 
 groups = [
     Group("1", label=""),
@@ -255,7 +264,8 @@ groups = [
     Group("8", label=""),
     Group("9", label=""),
 ]
-#              ﭮ                        🗘    
+#              ﭮ     
+#                  🗘    
 for i, group in enumerate(groups):
     actual_key = str(i + 1)
     keys.extend([
@@ -265,7 +275,8 @@ for i, group in enumerate(groups):
             lazy.group[group.name].toscreen(toggle=True),
             desc="Switch to group"),
 
-        # mod1 + shift + letter of group = switch to & move focused window to group
+        # mod1 + shift + letter of group =
+        # switch to & move focused window to group
         Key([mod, "shift"],
             actual_key,
             lazy.window.togroup(group.name, switch_group=True),
@@ -290,7 +301,7 @@ groups.append(
             DropDown(
                 "term",
                 "alacritty --class dropdown",
-                #opacity=1,
+                # opacity=1,
                 x=0.1,
                 y=0.15,
                 width=0.8,
@@ -300,7 +311,7 @@ groups.append(
             DropDown(
                 "vim_help",
                 "marktext Documents/Code/Learn-Vim",
-                #opacity=1,
+                # opacity=1,
                 x=0.1,
                 y=0.15,
                 width=0.8,
@@ -311,7 +322,10 @@ groups.append(
     )
 )
 
+
 # KEYS HELP
+
+
 def show_keys(keys):
     """
     print current keybindings in a pretty way for a rofi/dmenu window.
@@ -368,44 +382,51 @@ def show_keys(keys):
 
 # this must be done AFTER all the keys have been defined
 keys.extend(
-    [Key([mod], "F1", lazy.spawn("sh -c 'echo \"" + show_keys(keys) +
-         "\" | rofi -theme ~/.config/rofi/configTall.rasi -dmenu -p \"Keys:\" -i'"), desc="Print keyboard bindings")]
-)
+    [Key([mod], "F1", lazy.spawn("sh -c 'echo \"" + show_keys(keys) + "\" | \
+        rofi -theme ~/.config/rofi/configTall.rasi -dmenu -p\
+        \"Keys:\" -i'"), desc="Print keyboard bindings")])
+
 
 # COLOUR SCHEME
 
+
 # Nord scheme
-colors = [["#2E3440", "#2E3440"],#0 Polar Night 1
-          ["#3B4252", "#3B4252"],#1 Polar Night 2
-          ["#434C5E", "#434C5E"],#2 Polar Night 3
-          ["#4C566A", "#4C566A"],#3 Polar Night 4
-          ["#D8DEE9", "#D8DEE9"],#4 Snow Storm 1
-          ["#E5E9F0", "#E5E9F0"],#5 Snow Storm 2
-          ["#ECEFF4", "#ECEFF4"],#6 Snow Storm 3
-          ["#8FBCBB", "#8FBCBB"],#7 Frost 1 greenish
-          ["#88C0D0", "#88C0D0"],#8 Frost 2 light blue
-          ["#81A1C1", "#81A1C1"],#9 Frost 3 blue
-          ["#5E81AC", "#5E81AC"],#10 Frost 4 dark blue
-          ["#BF616A", "#BF616A"],#11 Aurora 1 red
-          ["#D08770", "#D08770"],#12 Aurora 2 orange
-          ["#EBCB8B", "#EBCB8B"],#13 Aurora 3 yellow
-          ["#A3BE8C", "#A3BE8C"],#14 Aurora 4 green
-          ["#B48EAD", "#B48EAD"],#15 Aurora 5 purpur
-          ["#3B4252", "#4C566A"],#16 Polar Night 2-4 gradient
-          ["#2E3440", "#4C566A"],#17 Polar Night 1-4 gradient
-          ["#00000000", "#00000000"]]#18 Transparent
+colors = [["#2E3440", "#2E3440"],  # 0 Polar Night 1
+          ["#3B4252", "#3B4252"],  # 1 Polar Night 2
+          ["#434C5E", "#434C5E"],  # 2 Polar Night 3
+          ["#4C566A", "#4C566A"],  # 3 Polar Night 4
+          ["#D8DEE9", "#D8DEE9"],  # 4 Snow Storm 1
+          ["#E5E9F0", "#E5E9F0"],  # 5 Snow Storm 2
+          ["#ECEFF4", "#ECEFF4"],  # 6 Snow Storm 3
+          ["#8FBCBB", "#8FBCBB"],  # 7 Frost 1 greenish
+          ["#88C0D0", "#88C0D0"],  # 8 Frost 2 light blue
+          ["#81A1C1", "#81A1C1"],  # 9 Frost 3 blue
+          ["#5E81AC", "#5E81AC"],  # 10 Frost 4 dark blue
+          ["#BF616A", "#BF616A"],  # 11 Aurora 1 red
+          ["#D08770", "#D08770"],  # 12 Aurora 2 orange
+          ["#EBCB8B", "#EBCB8B"],  # 13 Aurora 3 yellow
+          ["#A3BE8C", "#A3BE8C"],  # 14 Aurora 4 green
+          ["#B48EAD", "#B48EAD"],  # 15 Aurora 5 purpur
+          ["#3B4252", "#4C566A"],  # 16 Polar Night 2-4 gradient
+          ["#2E3440", "#4C566A"],  # 17 Polar Night 1-4 gradient
+          ["#00000000", "#00000000"]]  # 18 Transparent
+
 
 # LAYOUTS
 
+
 layout_theme = {"border_width": 2,
                 "margin": 0,
-                "border_focus": colors[13][0], 
-                "border_normal": colors[2][0] 
+                "border_focus": colors[13][0],
+                "border_normal": colors[2][0]
                 }
 
 layouts = [
     layout.MonadTall(**layout_theme, new_client_position='top'),
-    layout.Columns(**layout_theme, num_columns=2, border_focus_stack=colors[11][0]),
+    layout.Columns(**layout_theme,
+                   num_columns=2,
+                   border_focus_stack=colors[11][0],
+                   border_on_single=colors[13][0]),
     layout.Tile(**layout_theme, shift_windows=True),
     layout.Max(**layout_theme),
     # Try more layouts by unleashing below layouts.
@@ -432,36 +453,40 @@ floating_layout = layout.Floating(**layout_theme, float_rules=[
     Match(title='pinentry'),  # GPG key password entry
 ])
 
+
 # WIDGETS
 
+
 widget_defaults = dict(
-                    font='JetBrainsMono Nerd Font Semibold',
+                    font='JetBrainsMono Nerd Font Bold',
                     fontsize=14,
-                    padding=4,
+                    padding=2,
                     )
 
-# extension_defaults = widget_defaults.copy()
 bar_height = 24
 
+
 # SCREENS
+
 
 screens = [
      Screen(
          top=bar.Bar(
-            [   
+            [
                 widget.Spacer(
-                    length=8,
+                    length=6,
                 ),
                 widget.Image(
                     filename='~/.config/qtile/icons/nord_python.png',
                     margin_x=0,
                     margin_y=3,
-                    mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(os.path.expanduser('~/.config/rofi/powermenu.sh'))},
+                    mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(
+                        os.path.expanduser('~/.config/rofi/powermenu.sh'))},
                 ),
                 widget.Spacer(
-                    length=13,
+                    length=6,
                     ),
-               widget.GroupBox(
+                widget.GroupBox(
                                 font="JetBrainsMono Nerd Font",
                                 fontsize=16,
                                 spacing=2,
@@ -484,23 +509,26 @@ screens = [
                                 hide_unused=False,
                 ),
                 widget.Spacer(
-                    length=13,
+                    length=3,
                     ),
                 widget.CurrentLayoutIcon(
-                    fmt=' {}',
+                    fmt='{}',
                     foreground=colors[6],
                     scale=0.7,
                     padding=0,
                 ),
+                widget.Spacer(
+                    length=3,
+                    ),
                 widget.CurrentLayout(
-                    fmt=' {}',
+                    fmt='{}',
                     foreground=colors[6],
-                    font='JetBrainsMono Nerd Font Semibold',
+                    font='JetBrainsMono Nerd Font Bold',
                     fontsize=14,
                     padding=0,
                 ),
                 widget.Spacer(
-                    length=13,
+                    length=12,
                     ),
                 widget.Prompt(
                     foreground=colors[6],
@@ -528,19 +556,20 @@ screens = [
                     padding=5
                     ),
                 widget.Spacer(
-                    length=8,
+                    length=15,
                     ),
                 widget.NetGraph(
-                          interface = "wlan0",
+                          interface="wlan0",
                           border_color=colors[9],
                           border_width=2,
                           fill_color=colors[9],
                           graph_color=colors[9],
                           line_width=1,
                           start_pos='bottom',
+                          margin_x=0,
                           type='line'),
                 widget.Spacer(
-                    length=13,
+                    length=15,
                     ),
                 widget.TextBox(
                         text='',
@@ -549,10 +578,11 @@ screens = [
                         padding=0,
                         fontsize=16
                         ),
-                 widget.Memory(
-                         foreground = colors[6],
-                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e bashtop')},
-                         fmt = '{}',
+                widget.Memory(
+                         foreground=colors[6],
+                         mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(
+                            terminal + ' -e bashtop')},
+                         fmt='{}',
                          format='{MemUsed:.1f}{mm}',
                          measure_mem='G',
                          **widget_defaults
@@ -568,11 +598,12 @@ screens = [
                     fontsize=16
                     ),
                 widget.CPU(
-                        foreground = colors[6],
-                        threshold = 90,
-                        fmt = '{}',
+                        foreground=colors[6],
+                        threshold=90,
+                        fmt='{}',
                         format='{freq_current}GHz {load_percent}%',
-                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e bashtop')},
+                        mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(
+                            terminal + ' -e bashtop')},
                         **widget_defaults
                         ),
                 widget.Spacer(
@@ -608,25 +639,27 @@ screens = [
                     fontsize=16
                     ),
                 widget.Clock(
-                            fmt = '{}',
+                            fmt='{}',
                             format='%d-%m %a %H:%M',
                             foreground=colors[6],
                             **widget_defaults
                             ),
                 widget.Spacer(
-                    length=3,
+                    length=4,
                     ),
             ],
             size=bar_height,  # height in px
             background=colors[17],  # background color
             border_color=colors[3][0],
             border_width=[0, 0, 1, 0],
-            margin=0,#[4, 4, 0, 4],
+            margin=0,  # [4, 4, 0, 4],
             opacity=1,
          ), ),
  ]
 
+
 # MOUSE
+
 
 # Drag floating layouts.
 mouse = [
@@ -638,7 +671,7 @@ mouse = [
 ]
 
 dgroups_key_binder = None
-dgroups_app_rules = []  # type: List
+dgroups_app_rules = []  # type List
 # main = None  # WARNING: this is deprecated and will be removed soon
 follow_mouse_focus = False
 bring_front_click = False
@@ -647,300 +680,17 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 wmname = "Qtile"
 
+
 # HOOKS
+
 
 @hook.subscribe.startup_once
 def autostart():
     home = os.path.expanduser('~/.config/qtile/autostart.sh')
     subprocess.call([home])
 
+
 @hook.subscribe.screen_change
-def connect(qtile):
+def connect():
     scrpt = os.path.expanduser('~/.local/bin/audio_switch_on_hdmi_connect.sh')
     subprocess.call([scrpt])
-#screens = [
-#     Screen(
-#         top=bar.Bar(
-#            [   
-#                widget.Sep(padding=5,
-#                           linewidth=0,
-#                           foreground=colors[1],
-#                           background=colors[1]),
-#                # widget.TextBox(
-#                #     text='❄',
-#                #     font="JetBrainsMono Nerd Font",
-#                #     mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(os.path.expanduser('~/.config/rofi/powermenu.sh'))},
-#                #     background=colors[1],
-#                #     foreground=colors[6],
-#                #     fontsize=26,
-#                #     padding=0,
-#                # ),
-#                widget.Image(
-#                    filename='~/.config/qtile/icons/nord_python.png',
-#                    background=colors[1],
-#                    margin_x=2,
-#                    margin_y=3,
-#                    mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(os.path.expanduser('~/.config/rofi/powermenu.sh'))},
-#                ),
-#
-#                widget.TextBox(
-#                    text='',
-#                    font="JetBrainsMono Nerd Font",
-#                    background=colors[3],
-#                    foreground=colors[1],
-#                    padding=0,
-#                    fontsize=bar_height,
-#                ),
-#                widget.Sep(padding=8,
-#                           linewidth=0,
-#                           background=colors[3],
-#                           foreground=colors[3],), 
-#                widget.GroupBox(
-#                                font="JetBrainsMono Nerd Font",
-#                                fontsize=16,
-#                                spacing=2,
-#                                margin_y=3,
-#                                margin_x=0,
-#                                padding_y=5,
-#                                padding_x=2,
-#                                borderwidth=2,
-#                                active=colors[6],
-#                                inactive=colors[9],
-#                                rounded=False,
-#                                highlight_color=colors[2],
-#                                highlight_method="line",
-#                                this_current_screen_border=colors[9],
-#                                this_screen_border=colors[13],
-#                                other_current_screen_border=colors[9],
-#                                other_screen_border=colors[13],
-#                                foreground=colors[3],
-#                                background=colors[3],
-#                                hide_unused=False,
-#                ),
-#                widget.TextBox(
-#                        text = '',
-#                        font="JetBrainsMono Nerd Font",
-#                        background=colors[1],
-#                        foreground=colors[3],
-#                        padding=0,
-#                        fontsize=bar_height,
-#                        ),
-#                widget.CurrentLayoutIcon(
-#                    fmt=' {}',
-#                    foreground=colors[6],
-#                    background=colors[1],
-#                    scale=0.7,
-#                    padding=0,
-#                ),
-#                widget.CurrentLayout(
-#                    fmt=' {}',
-#                    foreground=colors[6],
-#                    background=colors[1],
-#                    font='JetBrainsMono Nerd Font Semibold',
-#                    fontsize=14,
-#                    padding=0,
-#                ),
-#                widget.TextBox(
-#                    text='',
-#                    font="JetBrainsMono Nerd Font",
-#                    background=colors[3],
-#                    foreground=colors[1],
-#                    padding=0,
-#                    fontsize=bar_height,
-#                ),    
-#                widget.Prompt(
-#                    background=colors[3],
-#                    foreground=colors[6],
-#                    **widget_defaults,
-#                    ),
-#                widget.Chord(
-#                    background=colors[3],
-#                    chords_colors={
-#                        'launch': (colors[6]),
-#                    },
-#                    name_transform=lambda name: name.upper(),
-#                    **widget_defaults,
-#                 ),
-#                widget.WindowName(
-#                    fmt='{}',
-#                    foreground=colors[6],
-#                    background=colors[3],
-#                    # max_chars=100,
-#                    width=600,
-#                    scroll=True,
-#                    scroll_delay=2,
-#                    scroll_interval=0.1,
-#                    scroll_step=1,
-#                    for_current_screen=True,
-#                    format='{name}{state}',
-#                    **widget_defaults,
-#                    ),
-#                widget.Sep(
-#                    linewidth=0,
-#                    padding=0,
-#                    foreground=colors[3],
-#                    background=colors[3]
-#                ),
-#                widget.TextBox(
-#                    text='',
-#                    font="JetBrainsMono Nerd Font",
-#                    background=colors[1],
-#                    foreground=colors[3],
-#                    padding=0,
-#                    fontsize=bar_height
-#                ),
-#                widget.Spacer(
-#                    background=colors[1]
-#                ),
-#                widget.Sep(
-#                    linewidth=0,
-#                    padding=6,
-#                    foreground=colors[1],
-#                    background=colors[1]
-#                ),
-#                # widget.Net(
-#                #          interface = "wlan0",
-#                #          format = 'Net: {down} ↓↑ {up}',
-#                #          foreground = colors[2],
-#                #          background = colors[0],
-#                #         ),
-#                widget.Systray(
-#                    # icon_size = 20,
-#                    foreground=colors[6],
-#                    background=colors[1],
-#                    icon_size=20,
-#                    padding=5
-#                    ),
-#                widget.Spacer(
-#                    length=5,
-#                    background=colors[1]
-#                ),
-#                widget.TextBox(
-#                    text='',
-#                    font="JetBrainsMono Nerd Font",
-#                    background=colors[1],
-#                    foreground=colors[3],
-#                    padding=0,
-#                    fontsize=bar_height
-#                    ),
-#                widget.Spacer(
-#                    length=5,
-#                    background=colors[3]
-#                ),
-#                    widget.TextBox(
-#                    text='',
-#                    font="JetBrainsMono Nerd Font",
-#                    background=colors[3],
-#                    foreground=colors[13],
-#                    padding=0,
-#                    fontsize=16
-#                    ),
-#                 widget.Memory(
-#                         foreground = colors[6],
-#                         background = colors[3],
-#                         mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e bashtop')},
-#                         fmt = '{}',
-#                         format='{MemUsed:.1f}{mm}',
-#                         measure_mem='G',
-#                         **widget_defaults
-#                         ),
-#                widget.TextBox(
-#                    text='',
-#                    font="JetBrainsMono Nerd Font",
-#                    background=colors[3],
-#                    foreground=colors[1],
-#                    padding=0,
-#                    fontsize=bar_height
-#                    ),
-#                    widget.TextBox(
-#                    text='',
-#                    font="JetBrainsMono Nerd Font",
-#                    background=colors[1],
-#                    foreground=colors[14],
-#                    padding=0,
-#                    fontsize=16
-#                    ),
-#                widget.CPU(
-#                        foreground = colors[6],
-#                        background=colors[1],
-#                        threshold = 90,
-#                        fmt = '{}',
-#                        format='{freq_current}GHz {load_percent}%',
-#                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -e bashtop')},
-#                        **widget_defaults
-#                        ),
-#                # widget.Pomodoro(
-#                #     background=colors[1],
-#                #     foreground=colors[6],
-#                #     color_active=colors[14],
-#                #     color_break=colors[13],
-#                #     color_inactive=colors[6],
-#                #     fmt='{}',
-#                #     **widget_defaults
-#                # ),
-#                widget.TextBox(
-#                    text='',
-#                    font="JetBrainsMono Nerd Font",
-#                    background=colors[1],
-#                    foreground=colors[3],
-#                    padding=0,
-#                    fontsize=bar_height
-#                    ),
-#                widget.Battery(
-#                    background=colors[3],
-#                    format="{char}",
-#                    charge_char="",
-#                    discharge_char="",
-#                    full_char="",
-#                    unknown_char="",
-#                    empty_char="",
-#                    show_short_text=False,
-#                    foreground=colors[4],
-#                    fontsize=16,
-#                    padding=5,
-#                    font="JetBrainsMono Nerd Font",
-#                ),
-#                widget.Battery(
-#                    format="{percent:2.0%}",
-#                    show_short_text=False,
-#                    foreground=colors[6],
-#                    background=colors[3],
-#                    **widget_defaults
-#                ),
-#
-#                widget.TextBox(
-#                    text='',
-#                    font="JetBrainsMono Nerd Font",
-#                    background=colors[3],
-#                    foreground=colors[1],
-#                    padding=0,
-#                    fontsize=bar_height
-#                ),
-#                    widget.TextBox(
-#                    text='',
-#                    font="JetBrainsMono Nerd Font",
-#                    background=colors[1],
-#                    foreground=colors[15],
-#                    padding=0,
-#                    fontsize=16
-#                    ),
-#                widget.Clock(
-#                            fmt = '{}',
-#                            format='%H:%M %d-%m %a',
-#                            foreground=colors[6],
-#                            background=colors[1],
-#                            **widget_defaults
-#                            ),
-#                widget.Sep(padding=2,
-#                           linewidth=0,
-#                           foreground=colors[1],
-#                           background=colors[1]),
-#            ],
-#            size=bar_height,  # height in px
-#            background=colors[0],  # background color
-#            #border_color=colors[10][0],
-#            #border_width=[2, 2, 2, 2],
-#            margin=0,#[4, 4, 0, 4],
-#            opacity=1,
-#         ), ),
-# ]

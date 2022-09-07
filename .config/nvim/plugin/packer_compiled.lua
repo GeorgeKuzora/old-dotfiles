@@ -94,11 +94,6 @@ _G.packer_plugins = {
     path = "/home/georgiy/.local/share/nvim/site/pack/packer/start/alpha-nvim",
     url = "https://github.com/goolord/alpha-nvim"
   },
-  ["bufferline.nvim"] = {
-    loaded = true,
-    path = "/home/georgiy/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
-    url = "https://github.com/akinsho/bufferline.nvim"
-  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/georgiy/.local/share/nvim/site/pack/packer/start/cmp-buffer",

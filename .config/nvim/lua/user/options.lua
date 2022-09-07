@@ -61,6 +61,11 @@ opt.swapfile = false        -- Disable swap files.
 opt.nrformats:remove('octal')   -- Interpret octal as decimal when incrementing numbers.
 opt.shell = '/usr/bin/zsh'
 -- opt.spell = true            --Enable spellchecking.
+vim.cmd[[setlocal spell spelllang=ru_ru,en_us]]
+vim.cmd[[set keymap=russian-jcukenwin]]
+vim.cmd[[set iminsert=0]]
+vim.cmd[[set imsearch=0]]
+vim.cmd[[highlight lCursor guifg=NONE guibg=cyan]]
 opt.wildignore = {'.pyc', '.swp'}   -- Ignore files matching these patterns when opening files based on a glob pattern.
 -- Colored colum
 opt.colorcolumn = '80'      -- colored line on 80 charachters
@@ -94,7 +99,7 @@ vim.cmd [[set path+=/home/georgiy/Documents/Code]]
 opt.completeopt = { "menuone", "noselect" }
 
 -- time to wait for a mapped sequence to complete (in milliseconds)
--- opt.timeoutlen = 100
+opt.timeoutlen = 500
 -- faster completion (4000ms default)
 -- opt.updatetime = 300
 -- set number column width to 2 {default 4}

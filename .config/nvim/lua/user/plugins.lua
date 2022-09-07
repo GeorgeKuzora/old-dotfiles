@@ -53,12 +53,12 @@ return packer.startup(function(use)
     -- Nord theme
     use 'arcticicestudio/nord-vim'
 
-	-- Treesitter
-	use {
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-		}
-	use "p00f/nvim-ts-rainbow"
+    -- Treesitter
+    use {
+    	"nvim-treesitter/nvim-treesitter",
+    	run = ":TSUpdate",
+    	}
+    use "p00f/nvim-ts-rainbow"
 
     -- Status line
     use {
@@ -70,7 +70,7 @@ return packer.startup(function(use)
     use "windwp/nvim-autopairs"
 
 	-- Buffer line
-	use "akinsho/bufferline.nvim"
+	-- use "akinsho/bufferline.nvim"
 
 	-- Nvim-tree file explower
 	use "kyazdani42/nvim-tree.lua"

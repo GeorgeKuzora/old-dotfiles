@@ -71,6 +71,7 @@ lualine.setup {
       disabled_filetypes = {
         statusline = {},
         winbar = {},
+        "alpha", "dashboard", "NvimTree", "Outline"
       },
       ignore_focus = {},
       always_divide_middle = true,

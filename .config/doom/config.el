@@ -82,12 +82,13 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-;;
-;;
+
+
 ;; MY CONFIGURATION
-;;
+
 ;; Display vertical line on column 80
 (global-display-fill-column-indicator-mode 1)
+
 ;; Enable Evil mode exit Insert mode by 'ii'
 (use-package key-chord
   :init
@@ -95,3 +96,26 @@
   :config
   (key-chord-mode 1))
   (key-chord-define evil-insert-state-map "ii" 'evil-normal-state)
+
+;; Tree-sitter enable globaly
+(global-tree-sitter-mode 1)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+
+;; Company CMP enable global
+(add-hook 'after-init-hook 'global-company-mode)
+;; Company-backends settings
+(setq company-backends '((company-capf
+                          company-dabbrev
+                          company-files
+                          company-dabbrev-code
+                          company-yasnippet)
+                         company-files))
+(global-set-key (kbd "C-c C-/") #'company-other-backend)
+(global-set-key (kbd "C-c y") 'company-yasnippet)
+
+;; LSP mode settings
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))  ; or lsp-deferred

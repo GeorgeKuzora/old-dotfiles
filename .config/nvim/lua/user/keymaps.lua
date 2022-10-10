@@ -30,10 +30,10 @@ end, {expr = true})
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 -- Better window navigation
-vim.keymap.set('n', '<C-h>', '<C-w>h')
-vim.keymap.set('n', '<C-j>', '<C-w>j')
-vim.keymap.set('n', '<C-k>', '<C-w>k')
-vim.keymap.set('n', '<C-l>', '<C-w>l')
+--[[ vim.keymap.set('n', '<M-h>', '<C-w>h') ]]
+--[[ vim.keymap.set('n', '<M-j>', '<C-w>j') ]]
+--[[ vim.keymap.set('n', '<M-k>', '<C-w>k') ]]
+--[[ vim.keymap.set('n', '<M-l>', '<C-w>l') ]]
 -- Create empty line without insert mode
 vim.keymap.set('n', '<Leader>o', 'o<Esc>')
 vim.keymap.set('n', '<Leader>O', 'O<Esc>')

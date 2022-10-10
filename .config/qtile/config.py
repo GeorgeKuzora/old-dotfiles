@@ -247,6 +247,11 @@ keys = [
     Key([mod], "F7", lazy.spawn("playerctl play-pause"),
         desc="Toggle play/pause audio"),
     Key([mod], "F5", lazy.spawn("playerctl stop"), desc="Stop audio"),
+
+    # KeyboardLayout contol
+    Key(["control"], "backslash",
+        lazy.widget["keyboardlayout"].next_keyboard(),
+        desc="Next keyboard layout."),
 ]
 
 
@@ -257,15 +262,13 @@ groups = [
     Group("1", label=""),
     Group("2", label=""),
     Group("3", label=""),
-    Group("4", label=""),
-    Group("5", label=""),
+    Group("4", label="ﴬ"),
+    Group("5", label="龎"),
     Group("6", label=""),
-    Group("7", label=""),
+    Group("7", label=""),
     Group("8", label=""),
     Group("9", label=""),
 ]
-#              ﭮ     
-#                  🗘    
 for i, group in enumerate(groups):
     actual_key = str(i + 1)
     keys.extend([
@@ -570,6 +573,24 @@ screens = [
                           type='line'),
                 widget.Spacer(
                     length=15,
+                    ),
+                widget.TextBox(
+                        text='龎',
+                        font="JetBrainsMono Nerd Font",
+                        foreground=colors[11],
+                        padding=0,
+                        fontsize=16
+                        ),
+                widget.KeyboardLayout(
+                    configured_keyboards=['us', 'ru'],
+                    display_map={'us': 'fcitx', 'ru': 'ru'},
+                    fmt='{}',
+                    option='ctrl:nocaps',
+                    foreground=colors[6],
+                    **widget_defaults,
+                    ),
+                widget.Spacer(
+                    length=13,
                     ),
                 widget.TextBox(
                         text='',

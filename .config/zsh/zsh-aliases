@@ -29,6 +29,7 @@ alias vim='nvim'
 alias peerflix='peerflix -l -k'
 alias brh='br -h'
 alias v='nvim "/home/georgiy/Documents/Code/Learn-Vim/$(ls /home/georgiy/Documents/Code/Learn-Vim | fzf -e -i --cycle)"'
+alias emacs_daemon="emacs --daemon & disown"
 alias emacs="emacsclient -c -a 'emacs' & disown"
 
 # history fuzzy find

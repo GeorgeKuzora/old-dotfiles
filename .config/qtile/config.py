@@ -256,7 +256,6 @@ keys = [
 
 
 # GROUPS
-# 
 
 
 groups = [
@@ -716,3 +715,9 @@ def autostart():
 def connect():
     scrpt = os.path.expanduser('~/.local/bin/audio_switch_on_hdmi_connect.sh')
     subprocess.call([scrpt])
+
+
+# @hook.subscribe.resume
+# def wakeup():
+#     scrpt = os.path.expanduser('~/.local/bin/audio_switch_on_hdmi_connect.sh')
+#     subprocess.call([scrpt])

@@ -249,9 +249,9 @@ keys = [
     Key([mod], "F5", lazy.spawn("playerctl stop"), desc="Stop audio"),
 
     # KeyboardLayout contol
-    Key(["control"], "backslash",
-        lazy.widget["keyboardlayout"].next_keyboard(),
-        desc="Next keyboard layout."),
+    # Key(["control"], "backslash",
+    #     lazy.widget["keyboardlayout"].next_keyboard(),
+    #     desc="Next keyboard layout."),
 ]
 
 
@@ -294,6 +294,9 @@ for i, group in enumerate(groups):
             desc="Switch to next group"),
 
         Key([mod], "Left", lazy.screen.prev_group(),
+            desc="Switch to previous group"),
+
+        Key([mod], "grave", lazy.screen.toggle_group(),
             desc="Switch to previous group"),
     ])
 
@@ -574,24 +577,24 @@ screens = [
                 widget.Spacer(
                     length=15,
                     ),
-                widget.TextBox(
-                        text='龎',
-                        font="JetBrainsMono Nerd Font",
-                        foreground=colors[11],
-                        padding=0,
-                        fontsize=16
-                        ),
-                widget.KeyboardLayout(
-                    configured_keyboards=['us', 'ru'],
-                    display_map={'us': 'fcitx', 'ru': 'ru'},
-                    fmt='{}',
-                    option='ctrl:nocaps',
-                    foreground=colors[6],
-                    **widget_defaults,
-                    ),
-                widget.Spacer(
-                    length=13,
-                    ),
+                # widget.TextBox(
+                #         text='龎',
+                #         font="JetBrainsMono Nerd Font",
+                #         foreground=colors[11],
+                #         padding=0,
+                #         fontsize=16
+                #         ),
+                # widget.KeyboardLayout(
+                #     configured_keyboards=['us', 'ru'],
+                #     display_map={'us': 'fcitx', 'ru': 'ru'},
+                #     fmt='{}',
+                #     option='ctrl:nocaps',
+                #     foreground=colors[6],
+                #     **widget_defaults,
+                #     ),
+                # widget.Spacer(
+                #     length=13,
+                #     ),
                 widget.TextBox(
                         text='',
                         font="JetBrainsMono Nerd Font",
@@ -699,7 +702,7 @@ bring_front_click = False
 cursor_warp = False
 auto_fullscreen = True
 focus_on_window_activation = "smart"
-wmname = "Qtile"
+wmname = "LG3D"
 
 
 # HOOKS
@@ -713,11 +716,11 @@ def autostart():
 
 @hook.subscribe.screen_change
 def connect():
-    scrpt = os.path.expanduser('~/.local/bin/audio_switch_on_hdmi_connect.sh')
-    subprocess.call([scrpt])
+    script = os.path.expanduser('/home/georgiy/.local/bin/rofi_scripts/hdmi_main_startup.sh')
+    subprocess.call([script])
 
 
 # @hook.subscribe.resume
 # def wakeup():
-#     scrpt = os.path.expanduser('~/.local/bin/audio_switch_on_hdmi_connect.sh')
-#     subprocess.call([scrpt])
+#     script = os.path.expanduser('~/.local/bin/audio_switch_on_hdmi_connect.sh')
+#     subprocess.call([script])

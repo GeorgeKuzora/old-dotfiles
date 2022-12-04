@@ -9,7 +9,8 @@ else
     xrandr --output HDMI-A-0 --primary --mode 1920x1080 --left-of eDP --mode 1920x1080
     pactl set-default-sink $hdmi_sink
 fi
-    
+# Set unmute for every thing
+pamixer -u
     
     
 #     xrandr --output "$extern" --off --output "$intern" --auto

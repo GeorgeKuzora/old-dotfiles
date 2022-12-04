@@ -1,7 +1,7 @@
 #!/bin/sh
 # devices
 laptop_sink="alsa_output.pci-0000_04_00.6.analog-stereo"
-jbl_sink="bluez_output.88_D0_39_10_4A_0B.a2dp-sink"
+jbl_sink="bluez_output.88_D0_39_10_4A_0B.1"
 hdmi_sink="alsa_output.pci-0000_04_00.1.hdmi-stereo"
 headphones_off="Missing device address argument"
 
@@ -48,3 +48,6 @@ else
 		fi
     fi
 fi
+
+# Set unmute for every thing
+pamixer -u

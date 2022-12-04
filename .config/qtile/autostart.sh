@@ -18,7 +18,7 @@ picom --experimental-backends --vsync --config ~/.config/picom/picom.conf & diso
 fcitx5 -d & disown
 
 # Keyboad layout change with xmodmap
-# xmodmap ~/.Xmodmap & disown
+xmodmap ~/.Xmodmap & disown
 
 # Keyboad layout change with setxkbmap
 # setxkbmap -option 'grp:shifts_toggle' -layout us,ru
@@ -66,3 +66,5 @@ else
     sleep 1
     pactl set-default-sink $hdmi_sink
 fi
+# Set unmute for every thing
+pamixer -u

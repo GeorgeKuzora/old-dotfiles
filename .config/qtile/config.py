@@ -720,7 +720,9 @@ def connect():
     subprocess.call([script])
 
 
-# @hook.subscribe.resume
-# def wakeup():
+@hook.subscribe.resume
+def wakeup():
+    home = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.call([home])
 #     script = os.path.expanduser('~/.local/bin/audio_switch_on_hdmi_connect.sh')
 #     subprocess.call([script])

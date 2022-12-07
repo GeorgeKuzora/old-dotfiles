@@ -10,4 +10,5 @@ sleep 1
 pactl set-default-sink $jbl_sink
 
 # Set unmute for every thing
-pamixer -u
+# sleep 1
+# pamixer -u

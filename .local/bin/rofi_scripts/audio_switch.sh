@@ -8,7 +8,7 @@ headphones_off="Missing device address argument"
 curr_device="$(pactl get-default-sink)"
 headphones_stat="$(bluetoothctl info)"
 
-intern=eDP
+# intern=eDP
 extern=HDMI-A-0
 # check if headphones connected
 if [ "$headphones_stat" = "$headphones_off" ]

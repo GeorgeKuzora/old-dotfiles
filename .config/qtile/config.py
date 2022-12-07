@@ -200,6 +200,11 @@ keys = [
         "s",
         lazy.group["scratchpad"].dropdown_toggle("vim_help"),
         desc="Toggle dropdown terminal",),
+    Key(
+        [mod],
+        "a",
+        lazy.group["scratchpad"].dropdown_toggle("goldendict"),
+        desc="Toggle dropdown goldendict dictionary",),
 
     # Switch focus of monitors
     Key([mod], "slash",
@@ -317,6 +322,16 @@ groups.append(
             DropDown(
                 "vim_help",
                 "marktext Documents/Code/Learn-Vim",
+                # opacity=1,
+                x=0.1,
+                y=0.15,
+                width=0.8,
+                height=0.7,
+                on_focus_lost_hide=True,
+            ),
+            DropDown(
+                "goldendict",
+                "goldendict",
                 # opacity=1,
                 x=0.1,
                 y=0.15,
@@ -710,19 +725,15 @@ wmname = "LG3D"
 
 @hook.subscribe.startup_once
 def autostart():
-    home = os.path.expanduser('~/.config/qtile/autostart.sh')
-    subprocess.call([home])
-
-
-@hook.subscribe.screen_change
-def connect():
-    script = os.path.expanduser('/home/georgiy/.local/bin/rofi_scripts/hdmi_main_startup.sh')
-    subprocess.call([script])
-
+    start = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.call([start])
 
 @hook.subscribe.resume
 def wakeup():
-    home = os.path.expanduser('~/.config/qtile/autostart.sh')
-    subprocess.call([home])
-#     script = os.path.expanduser('~/.local/bin/audio_switch_on_hdmi_connect.sh')
-#     subprocess.call([script])
+    resume = os.path.expanduser('~/.config/qtile/resume.sh')
+    subprocess.call([resume])
+
+@hook.subscribe.screens_reconfigured # screen_change
+def screen_connect():
+    connect = os.path.expanduser('~/.config/qtile/screen_change.sh')
+    subprocess.call([connect])

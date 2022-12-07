@@ -21,8 +21,7 @@ fcitx5 -d & disown
 xmodmap ~/.Xmodmap & disown
 
 # Keyboad layout change with setxkbmap
-# setxkbmap -option 'grp:shifts_toggle' -layout us,ru
-# setxkbmap -option 'ctrl:nocaps' &
+setxkbmap -option 'ctrl:nocaps' &
 
 # Yandex disk autostart
 yandex-disk start & disown
@@ -32,9 +31,6 @@ syncthing & disown
 
 # Clipboard menu daemon
 clipmenud & disown
-
-# Swiching audio devices after connect
-pactl load-module module-switch-on-connect & disown
 
 # Network manager applet
 nm-applet & disown
@@ -66,5 +62,7 @@ else
     sleep 1
     pactl set-default-sink $hdmi_sink
 fi
-# Set unmute for every thing
 pamixer -u
+
+# Swiching audio devices after connect
+# pactl load-module module-switch-on-connect & disown

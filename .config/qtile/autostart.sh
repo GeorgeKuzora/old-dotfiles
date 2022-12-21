@@ -18,10 +18,10 @@ picom --experimental-backends --vsync --config ~/.config/picom/picom.conf & diso
 fcitx5 -d & disown
 
 # Keyboad layout change with xmodmap
-xmodmap ~/.Xmodmap & disown
+# xmodmap ~/.Xmodmap & disown
 
 # Keyboad layout change with setxkbmap
-# setxkbmap -option 'ctrl:nocaps' &
+setxkbmap -option 'ctrl:nocaps' &
 
 # Yandex disk autostart
 yandex-disk start & disown

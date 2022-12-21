@@ -11,13 +11,12 @@ configuration {
     scroll-method:			0;
     disable-history:			false;
     sidebar-mode:			false;
-    modi:                   "window,run,drun,emoji";
+    modi:                   "window,run,drun";
     display-ssh:    "SSH:";
     display-run:    "Run:";
     display-drun:   "Apps:";
     display-window: "Win:";
     display-combi:  "Combi:";
-    display-emoji:  "Emoji:";
     display-dmenu:  "Menu:";
     
 }

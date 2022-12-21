@@ -153,8 +153,10 @@ keys = [
         ),
         desc="Rofi find files",
     ),
-    Key([mod], "period", lazy.spawn("rofi -show emoji"), desc="spawn rofi\
+    Key([mod], "period", lazy.spawn('rofimoji --skin-tone light --action clipboard --prompt "Emoji:"'), desc="spawn rofi\
         emoji panel"),
+    Key([mod, "shift"], "period", lazy.spawn('rofimoji --files mathematical_operators --action clipboard --prompt "Math:"'), desc="spawn rofi\
+        math symbols panel"),
     Key([mod], "comma", lazy.spawn("clipmenu -p 'Clipboard:' -theme\
         ~/.config/rofi/configTall.rasi"), desc="spawn clipboard menu"),
     Key([mod, "shift"],
@@ -198,13 +200,8 @@ keys = [
     Key(
         [mod],
         "s",
-        lazy.group["scratchpad"].dropdown_toggle("vim_help"),
-        desc="Toggle dropdown terminal",),
-    Key(
-        [mod],
-        "a",
-        lazy.group["scratchpad"].dropdown_toggle("goldendict"),
-        desc="Toggle dropdown goldendict dictionary",),
+        lazy.group["scratchpad"].dropdown_toggle("nvim"),
+        desc="Toggle dropdown Learn-Vim nvim",),
 
     # Switch focus of monitors
     Key([mod], "slash",
@@ -268,11 +265,11 @@ groups = [
     Group("2", label=""),
     Group("3", label=""),
     Group("4", label=""),
-    Group("5", label="ﴬ"),
-    Group("6", label="龎"),
-    Group("7", label=""),
-    Group("8", label=""),
-    Group("9", label=""),
+    Group("5", label="ﴬ", matches=[Match(wm_class="anki"),]),
+    Group("6", label="龎", matches=[Match(wm_class="com.github.johnfactotum.Foliate"),]),
+    Group("7", label="", matches=[Match(wm_class="telegram-desktop"),]),
+    Group("8", label="", matches=[Match(wm_class="zoom"),]),
+    Group("9", label="", matches=[Match(wm_class="applicationsyandex-music-nativefier-f7e7ae"),]),
 ]
 for i, group in enumerate(groups):
     actual_key = str(i + 1)
@@ -320,18 +317,8 @@ groups.append(
                 on_focus_lost_hide=True,
             ),
             DropDown(
-                "vim_help",
-                "marktext Documents/Code/Learn-Vim",
-                # opacity=1,
-                x=0.1,
-                y=0.15,
-                width=0.8,
-                height=0.7,
-                on_focus_lost_hide=True,
-            ),
-            DropDown(
-                "goldendict",
-                "goldendict",
+                "nvim",
+                terminal + " -e nvim Documents/Code/Learn-Vim",
                 # opacity=1,
                 x=0.1,
                 y=0.15,
@@ -345,7 +332,8 @@ groups.append(
 
 
 # KEYS HELP
-
+def unicode_map():
+    return None
 
 def show_keys(keys):
     """
@@ -469,6 +457,9 @@ floating_layout = layout.Floating(**layout_theme, float_rules=[
     Match(wm_class='maketag'),  # gitk
     Match(wm_class='ssh-askpass'),  # ssh-askpass
     Match(wm_class='pavucontrol'),  # pavucontrol
+    Match(wm_class='qalculate-gtk'), # qalculate
+    Match(wm_class='gnome-calculator'), # calculator
+    Match(wm_class='org.gnome.Characters'),  # Characters
     Match(title='Confirm File Replacing'),  # File replace pcmanfm
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
@@ -593,11 +584,19 @@ screens = [
                     length=15,
                     ),
                 # widget.TextBox(
-                #         text='龎',
+                #         text='',
                 #         font="JetBrainsMono Nerd Font",
                 #         foreground=colors[11],
                 #         padding=0,
                 #         fontsize=16
+                #         ),
+                # widget.Pomodoro(
+                #         color_active=colors[14],
+                #         color_break=colors[13],
+                #         color_inactive=colors[6],
+                #         fmt='{}',
+                #         prefix_inactive='Pomodoro',
+                #         prefix_paused='Pause'
                 #         ),
                 # widget.KeyboardLayout(
                 #     configured_keyboards=['us', 'ru'],

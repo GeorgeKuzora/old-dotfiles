@@ -21,7 +21,7 @@ fcitx5 -d & disown
 xmodmap ~/.Xmodmap & disown
 
 # Keyboad layout change with setxkbmap
-setxkbmap -option 'ctrl:nocaps' &
+# setxkbmap -option 'ctrl:nocaps' &
 
 # Yandex disk autostart
 yandex-disk start & disown

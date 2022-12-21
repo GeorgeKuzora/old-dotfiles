@@ -7,7 +7,7 @@
 xmodmap ~/.Xmodmap & disown
 
 # Keyboad layout change with setxkbmap
-setxkbmap -option 'ctrl:nocaps' &
+# setxkbmap -option 'ctrl:nocaps' &
 
 
 # After resume laptop is muted unmute laptop

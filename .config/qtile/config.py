@@ -266,7 +266,7 @@ groups = [
     Group("3", label=""),
     Group("4", label=""),
     Group("5", label="ﴬ", matches=[Match(wm_class="anki"),]),
-    Group("6", label="龎", matches=[Match(wm_class="com.github.johnfactotum.Foliate"),]),
+    Group("6", label="龎", matches=[Match(wm_class="com.github.johnfactotum.Foliate"), Match(wm_class="mcomix"), Match(wm_class="goldendict"),]),
     Group("7", label="", matches=[Match(wm_class="telegram-desktop"),]),
     Group("8", label="", matches=[Match(wm_class="zoom"),]),
     Group("9", label="", matches=[Match(wm_class="applicationsyandex-music-nativefier-f7e7ae"),]),
@@ -459,6 +459,8 @@ floating_layout = layout.Floating(**layout_theme, float_rules=[
     Match(wm_class='pavucontrol'),  # pavucontrol
     Match(wm_class='qalculate-gtk'), # qalculate
     Match(wm_class='gnome-calculator'), # calculator
+    Match(wm_class='solanum'), # solanum
+
     Match(wm_class='org.gnome.Characters'),  # Characters
     Match(title='Confirm File Replacing'),  # File replace pcmanfm
     Match(title='branchdialog'),  # gitk

@@ -50,3 +50,5 @@
 ;(unpin! t)
 (package! key-chord)
 (package! lsp-pyright)
+(package! beacon)
+(package! rainbow-mode)

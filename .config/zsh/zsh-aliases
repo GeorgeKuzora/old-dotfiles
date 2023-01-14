@@ -31,6 +31,7 @@ alias brh='br -h'
 alias v='nvim "/home/georgiy/Documents/Code/Learn-Vim/$(ls /home/georgiy/Documents/Code/Learn-Vim | fzf -e -i --cycle)"'
 alias emacs_daemon="emacs --daemon & disown"
 alias emacs="emacsclient -c -a 'emacs' & disown"
+alias hx="helix"
 
 # history fuzzy find
 alias cpy='xclip -selection c'

@@ -47,7 +47,7 @@ vim.keymap.set('n', '<Leader>,', ':registers<CR>')
 -- Quick buffers look
 vim.keymap.set('n', '<Leader>.', ':buffers<CR>')
 -- Quick buffer delete
--- vim.keymap.set('n', '<Leader>bk', ':bdelete<CR>')
+vim.keymap.set('n', '<Leader>bk', ':bdelete<CR>')
 -- Quick marks look
 vim.keymap.set('n', '<Leader>m', ':marks<CR>')
 -- Nvimtree значение по умолчанию

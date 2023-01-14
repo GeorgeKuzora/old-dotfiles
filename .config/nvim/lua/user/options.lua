@@ -61,7 +61,7 @@ opt.swapfile = false        -- Disable swap files.
 opt.nrformats:remove('octal')   -- Interpret octal as decimal when incrementing numbers.
 opt.shell = '/usr/bin/zsh'
 -- opt.spell = true            --Enable spellchecking.
-vim.cmd[[setlocal spell spelllang=ru_ru,en_us]]
+-- vim.cmd[[setlocal spell spelllang=ru_ru,en_us]]
 vim.cmd[[set keymap=russian-jcukenwin]]
 vim.cmd[[set iminsert=0]]
 vim.cmd[[set imsearch=0]]

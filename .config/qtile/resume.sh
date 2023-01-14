@@ -4,10 +4,10 @@
 
 # Sometimes after resume Caps -> Ctl binding is lost
 # Keyboad layout change with xmodmap
-# xmodmap ~/.Xmodmap & disown
+xmodmap ~/.Xmodmap & disown
 
 # Keyboad layout change with setxkbmap
-setxkbmap -option 'ctrl:nocaps' &
+# setxkbmap -option 'ctrl:nocaps' &
 
 
 # After resume laptop is muted unmute laptop

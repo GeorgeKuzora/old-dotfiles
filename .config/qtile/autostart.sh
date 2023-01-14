@@ -18,10 +18,10 @@ picom --experimental-backends --vsync --config ~/.config/picom/picom.conf & diso
 fcitx5 -d & disown
 
 # Keyboad layout change with xmodmap
-# xmodmap ~/.Xmodmap & disown
+xmodmap ~/.Xmodmap & disown
 
 # Keyboad layout change with setxkbmap
-setxkbmap -option 'ctrl:nocaps' &
+# setxkbmap -option 'ctrl:nocaps' &
 
 # Yandex disk autostart
 yandex-disk start & disown
@@ -47,8 +47,8 @@ playerctld daemon & disown
 # Emacs server daemon
 bash /home/georgiy/.local/bin/rofi_scripts/emacs_daemon & disown
 
-# Unclutter - hide cursor
-unclutter & disown
+# Unclutter - hide cursor - braking working with Zoom
+# unclutter & disown
 
 # Startup monitor change
 sleep 1

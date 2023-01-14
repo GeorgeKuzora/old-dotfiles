@@ -1,0 +1,26 @@
+theme = "catppuccin_macchiato"
+
+[editor]
+line-number = "relative"
+rulers = [80]
+shell = ["zsh", "-c"]
+bufferline = "multiple"
+
+[keys.normal]
+C-p = ["move_line_up", "scroll_up"]
+C-n = ["move_line_down", "scroll_down"]
+esc = ["collapse_selection", "keep_primary_selection"]
+
+[keys.insert]
+i = { i = "normal_mode"}
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.indent-guides]
+render = true

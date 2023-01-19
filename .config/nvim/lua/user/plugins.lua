@@ -51,7 +51,8 @@ return packer.startup(function(use)
 	use "moll/vim-bbye" -- Required by Bufferline config
 
     -- Nord theme
-    use 'arcticicestudio/nord-vim'
+    -- use 'arcticicestudio/nord-vim'
+	use { "catppuccin/nvim", as = "catppuccin" }
 
     -- Treesitter
     use {

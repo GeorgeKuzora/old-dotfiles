@@ -3,7 +3,7 @@
 bash /home/georgiy/.local/bin/rofi_scripts/wallpaper_set & disown
 #feh --no-fehbg --bg-fill "/home/georgiy/Pictures/Wallpapers/nord-wallpapers/undefined - Imgur.jpg"
 # Enable picom compositor
-picom --experimental-backends --vsync --config ~/.config/picom/picom.conf & disown # --experimental-backends --vsync should prevent screen tearing on most setups if needed
+picom --vsync --config ~/.config/picom/picom.conf & disown # --experimental-backends --vsync should prevent screen tearing on most setups if needed
 
 # Low battery notifier
 ~/.config/qtile/scripts/check_battery.sh & disown

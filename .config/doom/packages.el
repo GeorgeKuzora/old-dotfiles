@@ -52,3 +52,4 @@
 (package! lsp-pyright)
 (package! beacon)
 (package! rainbow-mode)
+(package! catppuccin-theme)

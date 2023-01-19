@@ -400,26 +400,47 @@ keys.extend(
 
 
 # Nord scheme
-colors = [["#2E3440", "#2E3440"],  # 0 Polar Night 1
-          ["#3B4252", "#3B4252"],  # 1 Polar Night 2
-          ["#434C5E", "#434C5E"],  # 2 Polar Night 3
-          ["#4C566A", "#4C566A"],  # 3 Polar Night 4
-          ["#D8DEE9", "#D8DEE9"],  # 4 Snow Storm 1
-          ["#E5E9F0", "#E5E9F0"],  # 5 Snow Storm 2
-          ["#ECEFF4", "#ECEFF4"],  # 6 Snow Storm 3
-          ["#8FBCBB", "#8FBCBB"],  # 7 Frost 1 greenish
-          ["#88C0D0", "#88C0D0"],  # 8 Frost 2 light blue
-          ["#81A1C1", "#81A1C1"],  # 9 Frost 3 blue
-          ["#5E81AC", "#5E81AC"],  # 10 Frost 4 dark blue
-          ["#BF616A", "#BF616A"],  # 11 Aurora 1 red
-          ["#D08770", "#D08770"],  # 12 Aurora 2 orange
-          ["#EBCB8B", "#EBCB8B"],  # 13 Aurora 3 yellow
-          ["#A3BE8C", "#A3BE8C"],  # 14 Aurora 4 green
-          ["#B48EAD", "#B48EAD"],  # 15 Aurora 5 purpur
-          ["#3B4252", "#4C566A"],  # 16 Polar Night 2-4 gradient
-          ["#2E3440", "#4C566A"],  # 17 Polar Night 1-4 gradient
-          ["#00000000", "#00000000"]]  # 18 Transparent
+# colors = [["#2E3440", "#2E3440"],  # 0 Polar Night 1
+#           ["#3B4252", "#3B4252"],  # 1 Polar Night 2
+#           ["#434C5E", "#434C5E"],  # 2 Polar Night 3
+#           ["#4C566A", "#4C566A"],  # 3 Polar Night 4
+#           ["#D8DEE9", "#D8DEE9"],  # 4 Snow Storm 1
+#           ["#E5E9F0", "#E5E9F0"],  # 5 Snow Storm 2
+#           ["#ECEFF4", "#ECEFF4"],  # 6 Snow Storm 3
+#           ["#8FBCBB", "#8FBCBB"],  # 7 Frost 1 greenish
+#           ["#88C0D0", "#88C0D0"],  # 8 Frost 2 light blue
+#           ["#81A1C1", "#81A1C1"],  # 9 Frost 3 blue
+#           ["#5E81AC", "#5E81AC"],  # 10 Frost 4 dark blue
+#           ["#BF616A", "#BF616A"],  # 11 Aurora 1 red
+#           ["#D08770", "#D08770"],  # 12 Aurora 2 orange
+#           ["#EBCB8B", "#EBCB8B"],  # 13 Aurora 3 yellow
+#           ["#A3BE8C", "#A3BE8C"],  # 14 Aurora 4 green
+#           ["#B48EAD", "#B48EAD"],  # 15 Aurora 5 purpur
+#           ["#3B4252", "#4C566A"],  # 16 Polar Night 2-4 gradient
+#           ["#2E3440", "#4C566A"],  # 17 Polar Night 1-4 gradient
+#           ["#00000000", "#00000000"]]  # 18 Transparent
 
+# Catppuccin Machiatto
+colors = [["#1e2030", "#1e2030"],  # 0 Mantle
+          ["#24273a", "#24273a"],  # 1 Base
+          ["#363a4f", "#363a4f"],  # 2 Surface0
+          ["#494d64", "#494d64"],  # 3 Surface1
+          ["#a5adcb", "#a5adcb"],  # 4 Subtext0
+          ["#b8c0e0", "#b8c0e0"],  # 5 Subtext1
+          # ["#f0c6c6", "#f0c6c6"],  # 6 Flamingo
+          ["#cad3f5", "#cad3f5"],  # 6 Text
+          ["#8bd5ca", "#8bd5ca"],  # 7 Teal
+          ["#91d7e3", "#91d7e3"],  # 8 Sky
+          ["#8aadf4", "#8aadf4"],  # 9 Blue
+          ["#7dc4e4", "#7dc4e4"],  # 10 Sapphire
+          ["#ed8796", "#ed8796"],  # 11 red
+          ["#f5a97f", "#f5a97f"],  # 12 peach
+          ["#eed49f", "#eed49f"],  # 13 yellow
+          ["#a6da95", "#a6da95"],  # 14 green
+          ["#c6a0f6", "#c6a0f6"],  # 15 mauve
+          ["#24273a", "#363a4f"],  # 16 Base-Surface0 gradient
+          ["#1e2030", "#363a4f"],  # 17 Mantle-Surface0 gradient
+          ["#00000000", "#00000000"]]  # 18 Transparent
 
 # LAYOUTS
 
@@ -574,10 +595,10 @@ screens = [
                     ),
                 widget.NetGraph(
                           interface="wlan0",
-                          border_color=colors[9],
+                          border_color=colors[4],
                           border_width=2,
-                          fill_color=colors[9],
-                          graph_color=colors[9],
+                          fill_color=colors[4],
+                          graph_color=colors[4],
                           line_width=1,
                           start_pos='bottom',
                           margin_x=0,
@@ -619,7 +640,7 @@ screens = [
                         fontsize=16
                         ),
                 widget.Memory(
-                         foreground=colors[6],
+                         foreground=colors[15],
                          mouse_callbacks={'Button1': lambda: qtile.cmd_spawn(
                             terminal + ' -e bashtop')},
                          fmt='{}',
@@ -638,7 +659,7 @@ screens = [
                     fontsize=16
                     ),
                 widget.CPU(
-                        foreground=colors[6],
+                        foreground=colors[9],
                         threshold=90,
                         fmt='{}',
                         format='{freq_current}GHz {load_percent}%',
@@ -665,7 +686,7 @@ screens = [
                 widget.Battery(
                     format="{percent:2.0%}",
                     show_short_text=False,
-                    foreground=colors[6],
+                    foreground=colors[14],
                     **widget_defaults
                 ),
                 widget.Spacer(
@@ -681,7 +702,7 @@ screens = [
                 widget.Clock(
                             fmt='{}',
                             format='%d-%m %a %H:%M',
-                            foreground=colors[6],
+                            foreground=colors[13],
                             **widget_defaults
                             ),
                 widget.Spacer(
@@ -691,7 +712,7 @@ screens = [
             size=bar_height,  # height in px
             background=colors[17],  # background color
             border_color=colors[3][0],
-            border_width=[0, 0, 1, 0],
+            border_width=[0, 0, 0, 0],
             margin=0,  # [4, 4, 0, 4],
             opacity=1,
          ), ),

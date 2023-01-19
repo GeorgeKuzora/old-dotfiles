@@ -8,19 +8,19 @@
 
 
 * {
-	nord0: #2e3440;
+	nord0: #1e2030;
 	nord1: #3b4252;
 	nord2: #434c5e;
 	nord3: #4c566a;
 
 	nord4: #d8dee9;
 	nord5: #e5e9f0;
-	nord6: #eceff4;
+	nord6: #f4dbd6;
 
-	nord7: #8fbcbb;
+	nord7: #f4dbd6;
 	nord8: #88c0d0;
-	nord9: #81a1c1;
-	nord10: #5e81ac;
+	nord9: #c6a0f6;
+	nord10: #b7bdf8;
 	nord11: #bf616a;
 
 	nord12: #d08770;
@@ -67,7 +67,7 @@ message {
 inputbar {
     color: @nord6;
     padding: 10px;
-    background-color: #3b4252e6;
+    background-color: #363a4fe6;
 
     border: 1px;
     border-radius:  6px 6px 0px 0px;
@@ -89,7 +89,7 @@ listview {
     border-radius: 0px 0px 6px 6px;
     border-color: @nord10;
     border: 0px 1px 1px 1px;
-    background-color: #2e3440e6;
+    background-color: #1e2030e6;
     dynamic: false;
 }
 
@@ -99,12 +99,12 @@ element {
     border-radius: 4px;
     background-color: transparent;
     color: @foreground;
-    text-color: rgb(216, 222, 233);
+    text-color: @nord6;
 }
 
 element selected.normal {
 	background-color: @nord7;
-	text-color: #2e3440;
+	text-color: #1e2030;
 }
 
 element-text, element-icon {

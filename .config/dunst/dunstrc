@@ -89,7 +89,7 @@
     frame_width = 2
 
     # Defines color of the frame around the notification window.
-    frame_color = "#81A1C1"
+    frame_color = "#B7BDF8"
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
@@ -303,23 +303,23 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#4C566A"
-    foreground = "#ECEFF4"
+    background = "#363A4F"
+    foreground = "#F4DBD6"
     timeout = 5
     # Icon for notifications with low urgency, uncomment to enable
     default_icon = /home/georgiy/.config/dunst/normal.png
 
 [urgency_normal]
-    background = "#4C566A"
-    foreground = "#ECEFF4"
+    background = "#363A4F"
+    foreground = "#F4DBD6"
     timeout = 5
     # Icon for notifications with normal urgency, uncomment to enable
     default_icon = /home/georgiy/.config/dunst/normal.png
 
 [urgency_critical]
-    background = "#BF616A"
-    foreground = "#ECEFF4"
-    frame_color = "#EBCB8B"
+    background = "#363A4F"
+    foreground = "#F4DBD6"
+    frame_color = "#ED8796"
     timeout = 5
     # Icon for notifications with critical urgency, uncomment to enable
     default_icon = /home/georgiy/.config/dunst/critical.png
